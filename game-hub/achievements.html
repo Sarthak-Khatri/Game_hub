@@ -14,9 +14,9 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Achievements - Game Hub">
     <meta property="og:description" content="Unlock achievements and earn XP! Track your progress through Beginner, Intermediate, Advanced, and Legendary achievements.">
-    <meta property="og:image" content="../assets/images/og.png">
+    <meta property="og:image" content="https://sarthak-khatri.github.io/Game_hub/assets/images/og.png">
     <meta property="og:image:alt" content="Game Hub Achievements System">
-    <meta property="og:url" content="">
+    <meta property="og:url" content="https://sarthak-khatri.github.io/Game_hub/game-hub/achievements.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Game Hub">
     
@@ -24,7 +24,10 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Achievements - Game Hub">
     <meta name="twitter:description" content="Unlock achievements and earn XP across all Game Hub mini-games!">
-    <meta name="twitter:image" content="../assets/images/og.png">
+    <meta name="twitter:image" content="https://sarthak-khatri.github.io/Game_hub/assets/images/og.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sarthak-khatri.github.io/Game_hub/game-hub/achievements.html">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/images/fb.png">
@@ -36,6 +39,24 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#6366f1">
     <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <!-- Apply theme immediately before body renders -->
+    <script>
+        (function() {
+            let theme = localStorage.getItem('gameHubTheme');
+            if (!theme) {
+                try {
+                    const settings = JSON.parse(localStorage.getItem('gameHubSettings') || '{}');
+                    theme = settings.theme;
+                } catch (e) {}
+            }
+            theme = theme || 'dark';
+            document.documentElement.className = 'theme-' + theme;
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.className = document.body.className.replace(/theme-\w+/, '') + ' theme-' + theme;
+            });
+        })();
+    </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
@@ -348,9 +369,12 @@
     </style>
 </head>
 <body class="theme-dark min-h-screen">
+    <!-- Load loading script first for immediate display -->
+    <script src="shared/simple-loading.js"></script>
+    
     <!-- Video Background -->
     <video class="video-background" autoplay muted loop preload="metadata">
-        <source src="assets/videos/bg2.mp4" type="video/mp4">
+        <source src="../assets/videos/bg2.mp4" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
     

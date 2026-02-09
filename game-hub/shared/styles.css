@@ -392,6 +392,22 @@ input[type="button"], input[type="submit"], [onclick], [role="button"] {
     animation: fadeIn 0.2s ease-out;
 }
 
+/* Theme-specific loading backgrounds */
+.simple-loading.theme-dark {
+    background: rgba(10, 10, 26, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+.simple-loading.theme-anime {
+    background: rgba(13, 13, 35, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+.simple-loading.theme-cartoon {
+    background: rgba(255, 248, 225, 0.92);
+    backdrop-filter: blur(8px);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -440,6 +456,23 @@ input[type="button"], input[type="submit"], [onclick], [role="button"] {
     will-change: box-shadow;
 }
 
+/* Theme-specific controller styles */
+.theme-anime .controller {
+    background: linear-gradient(145deg, #1a1a3a, #0d0d23);
+    box-shadow: 
+        0 0 15px var(--current-primary),
+        0 0 30px var(--current-accent),
+        inset 0 1px 4px rgba(255,255,255,0.15);
+}
+
+.theme-cartoon .controller {
+    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    box-shadow: 
+        0 0 10px var(--current-primary),
+        inset 0 1px 4px rgba(0,0,0,0.1);
+    border: 3px solid var(--current-primary);
+}
+
 .controller::before {
     content: '';
     position: absolute;
@@ -452,6 +485,10 @@ input[type="button"], input[type="submit"], [onclick], [role="button"] {
     border: 1px solid var(--current-secondary);
 }
 
+.theme-cartoon .controller::before {
+    background: linear-gradient(145deg, #e0e0e0, #d0d0d0);
+}
+
 .controller::after {
     content: '';
     position: absolute;
@@ -462,6 +499,10 @@ input[type="button"], input[type="submit"], [onclick], [role="button"] {
     background: linear-gradient(145deg, #333, #222);
     border-radius: 6px 6px 0 0;
     border: 1px solid var(--current-secondary);
+}
+
+.theme-cartoon .controller::after {
+    background: linear-gradient(145deg, #e0e0e0, #d0d0d0);
 }
 
 .d-pad {
