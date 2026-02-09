@@ -525,8 +525,9 @@
     <script src="game-hub/shared/simple-loading.js"></script>
     
     <!-- Video Background -->
-    <video class="video-background" autoplay muted loop preload="metadata">
+    <video class="video-background" autoplay muted loop playsinline preload="auto">
         <source src="assets/videos/bg2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
     <div class="video-overlay"></div>
     
@@ -552,6 +553,15 @@
     <script src="game-hub/shared/simple-loading.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Ensure video plays (fallback for browsers that block autoplay)
+            const video = document.querySelector('.video-background');
+            if (video) {
+                video.play().catch(err => {
+                    console.log('Video autoplay prevented:', err);
+                    // Video will play when user interacts with page
+                });
+            }
+            
             // Apply saved theme for start page (don't force dark theme)
             // The theme manager will automatically load the saved theme from localStorage
             
@@ -587,6 +597,10 @@
             
             // Start button click
             document.getElementById('start-button').addEventListener('click', () => {
+                // Ensure video plays on user interaction
+                if (video && video.paused) {
+                    video.play();
+                }
                 startGameHub();
             });
         });
