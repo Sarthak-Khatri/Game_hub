@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Main Entry Point -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Main Menu -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/main-menu.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Games Hub -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games-hub.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Profile Page -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/profile.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Achievements Page -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/achievements.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Settings Page -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/settings.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- About Page -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/about.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Individual Games -->
+    
+    <!-- Snake Game -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games/SnakeGame/index.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Tic Tac Toe -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games/tic%20tac%20toe/index.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Memory Card Game -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games/memory-card-game-main/index.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Whack-a-Mole -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games/whack-a-mole-main/index.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Rock Paper Scissors -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games/StonePaperScissors/index.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Reaction Test -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games/reaction/index.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Hangman Game -->
+    <url>
+        <loc>https://sarthak-khatri.github.io/Game_hub/game-hub/games/Hangman-Game/index.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+</urlset>

@@ -1,0 +1,55 @@
+# robots.txt for Game Hub
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow crawling of specific directories
+Disallow: /assets/
+Disallow: /docs/
+Disallow: /.vscode/
+Disallow: /sky-blue-gaming/
+
+# Allow crawling of main pages
+Allow: /index.html
+Allow: /game-hub/main-menu.html
+Allow: /game-hub/games-hub.html
+Allow: /game-hub/profile.html
+Allow: /game-hub/achievements.html
+Allow: /game-hub/settings.html
+Allow: /game-hub/about.html
+
+# Allow crawling of game pages
+Allow: /game-hub/games/
+
+# Sitemap location
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl delay (optional - adjust as needed)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots (optional)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

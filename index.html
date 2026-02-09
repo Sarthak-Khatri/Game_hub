@@ -14,11 +14,11 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Game Hub - Ultimate Gaming Experience">
     <meta property="og:description" content="Play 7 exciting mini-games with multiple themes and achievements. Snake, Tic Tac Toe, Memory Match, Hangman and more!">
-    <meta property="og:image" content="assets/images/og.png">
+    <meta property="og:image" content="https://sarthak-khatri.github.io/Game_hub/assets/images/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Game Hub - Collection of Mini Games">
-    <meta property="og:url" content="">
+    <meta property="og:url" content="https://sarthak-khatri.github.io/Game_hub/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Game Hub">
     
@@ -26,7 +26,10 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Game Hub - Ultimate Gaming Experience">
     <meta name="twitter:description" content="Play 7 exciting mini-games with multiple themes and achievements!">
-    <meta name="twitter:image" content="assets/images/og.png">
+    <meta name="twitter:image" content="https://sarthak-khatri.github.io/Game_hub/assets/images/og.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sarthak-khatri.github.io/Game_hub/">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/fb.png">
@@ -38,6 +41,24 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#6366f1">
     <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <!-- Apply theme immediately before body renders -->
+    <script>
+        (function() {
+            let theme = localStorage.getItem('gameHubTheme');
+            if (!theme) {
+                try {
+                    const settings = JSON.parse(localStorage.getItem('gameHubSettings') || '{}');
+                    theme = settings.theme;
+                } catch (e) {}
+            }
+            theme = theme || 'dark';
+            document.documentElement.className = 'theme-' + theme;
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.className = 'theme-' + theme;
+            });
+        })();
+    </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
@@ -500,6 +521,9 @@
     </style>
 </head>
 <body>
+    <!-- Load loading script first for immediate display -->
+    <script src="game-hub/shared/simple-loading.js"></script>
+    
     <!-- Video Background -->
     <video class="video-background" autoplay muted loop preload="metadata">
         <source src="assets/videos/bg2.mp4" type="video/mp4">
