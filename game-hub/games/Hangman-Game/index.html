@@ -41,7 +41,21 @@
   <link rel="stylesheet" href="../../shared/styles.css">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="theme-dark">
+<body>
+  <!-- Apply theme to body immediately -->
+  <script>
+    (function() {
+      let theme = localStorage.getItem('gameHubTheme');
+      if (!theme) {
+        try {
+          const settings = JSON.parse(localStorage.getItem('gameHubSettings') || '{}');
+          theme = settings.theme;
+        } catch (e) {}
+      }
+      document.body.className = 'theme-' + (theme || 'dark');
+    })();
+  </script>
+  
   <!-- Back Button -->
   <div class="btn btn-secondary back-button" onclick="navigateWithLoading('../../games-hub.html', 'Going Back...')" style="cursor: pointer;">
     <i class="fas fa-arrow-left"></i> Back

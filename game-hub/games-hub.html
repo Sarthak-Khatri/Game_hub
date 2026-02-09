@@ -477,7 +477,21 @@
         }
     </style>
 </head>
-<body class="theme-dark">
+<body>
+    <!-- Apply theme to body immediately -->
+    <script>
+        (function() {
+            let theme = localStorage.getItem('gameHubTheme');
+            if (!theme) {
+                try {
+                    const settings = JSON.parse(localStorage.getItem('gameHubSettings') || '{}');
+                    theme = settings.theme;
+                } catch (e) {}
+            }
+            document.body.className = 'theme-' + (theme || 'dark');
+        })();
+    </script>
+    
     <!-- Load loading script first for immediate display -->
     <script src="shared/simple-loading.js"></script>
     
