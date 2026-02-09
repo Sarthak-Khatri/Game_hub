@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="style.css">
+    <title>Whack-a-Mole Arcade</title>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="game-wrapper">
+        <!-- Header -->
+        <div class="game-header">
+            <h1 class="game-title">
+                <span class="title-word">WHACK</span>
+                <span class="title-word">A</span>
+                <span class="title-word">MOLE</span>
+            </h1>
+            <p class="game-tagline">How fast are your reflexes?</p>
+        </div>
+
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <div class="stat-card current-score">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="currentScore">0</span>
+                </div>
+            </div>
+
+            <div class="stat-card timer">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-content">
+                    <span class="stat-label">Time</span>
+                    <span class="stat-value" id="timeLeft">60</span>
+                </div>
+            </div>
+
+            <div class="stat-card high-score">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-content">
+                    <span class="stat-label">High Score</span>
+                    <span class="stat-value" id="highScore">0</span>
+                </div>
+            </div>
+
+            <div class="stat-card streak">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-content">
+                    <span class="stat-label">Streak</span>
+                    <span class="stat-value" id="streak">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board-container">
+            <div class="board">
+                <div class="hole" data-index="0"></div>
+                <div class="hole" data-index="1"></div>
+                <div class="hole" data-index="2"></div>
+                <div class="hole" data-index="3"></div>
+                <div class="hole" data-index="4"></div>
+                <div class="hole" data-index="5"></div>
+                <div class="hole" data-index="6"></div>
+                <div class="hole" data-index="7"></div>
+                <div class="hole" data-index="8"></div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="startBtn" class="btn btn-start">Start Game</button>
+            <button id="resetBtn" class="btn btn-reset">Reset Stats</button>
+            <div class="difficulty-selector">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="insane">Insane</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div class="modal" id="gameOverModal">
+            <div class="modal-content">
+                <h2 class="modal-title">Game Over!</h2>
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <span class="modal-stat-label">Final Score</span>
+                        <span class="modal-stat-value" id="finalScore">0</span>
+                    </div>
+                    <div class="modal-stat">
+                        <span class="modal-stat-label">High Score</span>
+                        <span class="modal-stat-value" id="modalHighScore">0</span>
+                    </div>
+                    <div class="modal-stat">
+                        <span class="modal-stat-label">Moles Whacked</span>
+                        <span class="modal-stat-value" id="molesWhacked">0</span>
+                    </div>
+                    <div class="modal-stat">
+                        <span class="modal-stat-label">Best Streak</span>
+                        <span class="modal-stat-value" id="bestStreak">0</span>
+                    </div>
+                </div>
+                <div class="modal-message" id="modalMessage"></div>
+                <button id="playAgainBtn" class="btn btn-start">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <script src="main.js"></script>
+</body>
+</html>

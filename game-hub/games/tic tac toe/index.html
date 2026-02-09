@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - Neon Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+    
+    <!-- Grid Pattern Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">
+                <span class="glitch" data-text="TIC TAC TOE">TIC TAC TOE</span>
+            </h1>
+            <div class="subtitle">NEON BATTLE // PLAYER VS AI</div>
+        </header>
+
+        <!-- Game Status -->
+        <div class="status-panel">
+            <div class="status-display">
+                <div class="status-text" id="statusText">YOUR MOVE</div>
+                <div class="ai-thinking" id="aiThinking">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    AI COMPUTING...
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-area">
+            <div class="board" id="board">
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+                <div class="cell" data-cell></div>
+            </div>
+            <div class="winning-line" id="winningLine"></div>
+        </div>
+
+        <!-- Scoreboard -->
+        <div class="scoreboard">
+            <div class="score-box player-score">
+                <div class="score-header">PLAYER</div>
+                <div class="score-symbol">✕</div>
+                <div class="score-number" id="playerWins">0</div>
+            </div>
+            
+            <div class="score-box tie-score">
+                <div class="score-header">DRAWS</div>
+                <div class="score-symbol">—</div>
+                <div class="score-number" id="draws">0</div>
+            </div>
+            
+            <div class="score-box ai-score">
+                <div class="score-header">AI</div>
+                <div class="score-symbol">◯</div>
+                <div class="score-number" id="aiWins">0</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="difficulty-panel">
+                <label for="difficulty">DIFFICULTY MODE</label>
+                <div class="difficulty-buttons">
+                    <button class="diff-btn" data-difficulty="easy">EASY</button>
+                    <button class="diff-btn active" data-difficulty="medium">MEDIUM</button>
+                    <button class="diff-btn" data-difficulty="impossible">IMPOSSIBLE</button>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="restartBtn">NEW GAME</button>
+                <button class="btn btn-secondary" id="resetStatsBtn">RESET STATS</button>
+            </div>
+        </div>
+
+        <!-- Win Animation -->
+        <div class="celebration" id="celebration">
+            <img src="excited.gif" alt="Celebration" class="celebration-gif">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

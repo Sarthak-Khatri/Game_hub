@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Reaction Test - Test Your Reflexes</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Particles container for celebration -->
+    <div id="particles-js"></div>
+    <!-- Back Button -->
+    <a href="../../games-hub.html" class="back-button">
+        ← Back
+    </a>
+    
+    <div class="container">
+        <header>
+            <h1>
+                <svg class="title-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13 0L4 14h6l-2 10 9-14h-6l2-10z"/>
+                </svg>
+                Reaction Test
+            </h1>
+            <p class="subtitle">Test your reflexes and beat your best time!</p>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-content">
+                    <span class="stat-label">Best Time</span>
+                    <span id="best-time" class="stat-value">-</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <span class="stat-label">Average</span>
+                    <span id="avg-time" class="stat-value">-</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <span class="stat-label">Attempts</span>
+                    <span id="attempts" class="stat-value">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <div class="instructions-card">
+                <div class="instruction-step">
+                    <span class="step-number">1</span>
+                    <span class="step-text">Click the circle to start</span>
+                </div>
+                <div class="instruction-step">
+                    <span class="step-number">2</span>
+                    <span class="step-text">Wait for it to turn green</span>
+                </div>
+                <div class="instruction-step">
+                    <span class="step-number">3</span>
+                    <span class="step-text">Click as fast as you can!</span>
+                </div>
+                <p class="warning-text">⚠️ Don't click too early or you'll have to restart!</p>
+            </div>
+            
+            <div class="reaction-container">
+                <div class="reaction-circle" id="reaction-circle" role="button" tabindex="0" aria-label="Reaction test button">
+                    <div class="circle-content">
+                        <div class="reaction-text" id="reaction-text">Click to Start</div>
+                        <div class="reaction-subtext" id="reaction-subtext"></div>
+                    </div>
+                </div>
+                <div class="reaction-hint" id="reaction-hint">Press Space or Click</div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <button id="reset-btn" class="reset-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+                </svg>
+                Reset Stats
+            </button>
+            <div class="performance-guide">
+                <h3>Performance Guide</h3>
+                <div class="guide-items">
+                    <div class="guide-item excellent">⚡ &lt;200ms - Lightning!</div>
+                    <div class="guide-item great">🚀 200-300ms - Very Fast!</div>
+                    <div class="guide-item good">👍 300-400ms - Good!</div>
+                    <div class="guide-item average">😐 400-500ms - Average</div>
+                    <div class="guide-item slow">🐌 &gt;500ms - Keep Trying!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

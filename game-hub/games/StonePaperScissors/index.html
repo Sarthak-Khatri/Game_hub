@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors - Best of 5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <h1>⚡ ROCK PAPER SCISSORS ⚡</h1>
+
+        <!-- Round Indicator -->
+        <div class="round-indicator">
+            <div class="round-text" id="round-text">Round 1</div>
+            <div class="round-dots" id="round-dots">
+                <div class="round-dot"></div>
+                <div class="round-dot"></div>
+                <div class="round-dot"></div>
+                <div class="round-dot"></div>
+                <div class="round-dot"></div>
+            </div>
+        </div>
+
+        <div class="score-board">
+            <div class="score-box">
+                <div class="score-label">👤 You</div>
+                <div class="score-value" id="user-score">0</div>
+            </div>
+            <div class="score-box">
+                <div class="score-label">🤖 Computer</div>
+                <div class="score-value" id="comp-score">0</div>
+            </div>
+        </div>
+
+        <div class="choices-container" id="choices-container">
+            <div class="choice" data-choice="rock">
+                <div class="choice-inner">
+                    <img src="images/rock.png" alt="Rock" class="choice-image">
+                </div>
+                <div class="choice-label">🪨 Rock</div>
+            </div>
+
+            <div class="choice" data-choice="paper">
+                <div class="choice-inner">
+                    <img src="images/paper.png" alt="Paper" class="choice-image">
+                </div>
+                <div class="choice-label">📄 Paper</div>
+            </div>
+
+            <div class="choice" data-choice="scissors">
+                <div class="choice-inner">
+                    <img src="images/scissors.png" alt="Scissors" class="choice-image">
+                </div>
+                <div class="choice-label">✂️ Scissors</div>
+            </div>
+        </div>
+
+        <div class="message-container">
+            <div class="message" id="message">Choose your weapon! ⚔️</div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-label">🏆 Matches Won</div>
+                <div class="stat-value" id="matches-won">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">💔 Matches Lost</div>
+                <div class="stat-value" id="matches-lost">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">🎮 Total Rounds</div>
+                <div class="stat-value" id="total-rounds">0</div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="btn" id="new-match">🆕 New Match</button>
+            <button class="btn" id="reset">🔄 Reset Stats</button>
+        </div>
+    </div>
+
+    <!-- Battle Overlay -->
+    <div class="battle-overlay" id="battle-overlay">
+        <div class="battle-content">
+            <div class="vs-text">⚔️ VS ⚔️</div>
+            <div class="battle-choices" id="battle-choices"></div>
+        </div>
+    </div>
+
+    <!-- Victory Overlay -->
+    <div class="victory-overlay" id="victory-overlay">
+        <div class="victory-content">
+            <div class="victory-title" id="victory-title">🎉 YOU WIN! 🎉</div>
+            <div class="victory-subtitle" id="victory-subtitle">You won 3 rounds!</div>
+            <button class="btn" onclick="startNewMatch()">🎮 Play Again</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

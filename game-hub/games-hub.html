@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Games - Game Hub</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Play 7 amazing mini-games: Snake, Tic Tac Toe, Memory Match, Whack-a-Mole, Rock Paper Scissors, Reaction Test, and Hangman. Choose your favorite!">
+    <meta name="keywords" content="play games, snake game, tic tac toe, memory game, whack a mole, rock paper scissors, reaction test, hangman game">
+    <meta name="author" content="Game Hub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Play Games - Game Hub">
+    <meta property="og:description" content="Play 7 amazing mini-games: Snake, Tic Tac Toe, Memory Match, Whack-a-Mole, Rock Paper Scissors, Reaction Test, and Hangman!">
+    <meta property="og:image" content="../assets/images/og.png">
+    <meta property="og:image:alt" content="Game Hub - Play Games Collection">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Game Hub">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Play Games - Game Hub">
+    <meta name="twitter:description" content="Play 7 amazing mini-games including Snake, Tic Tac Toe, Memory Match and more!">
+    <meta name="twitter:image" content="../assets/images/og.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/fb.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/fb.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        .games-hub {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .hub-header {
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--current-primary);
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .hub-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--current-primary), var(--current-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hub-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            color: var(--current-text);
+        }
+        
+        .games-container {
+            flex: 1;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            will-change: transform, box-shadow;
+        }
+        
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .game-card:hover::before {
+            left: 100%;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: var(--current-primary);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4), 
+                        0 0 50px var(--current-primary);
+        }
+        
+        .game-icon {
+            width: clamp(70px, 12vw, 100px);
+            height: clamp(70px, 12vw, 100px);
+            margin: 0 auto 1rem;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px var(--current-primary));
+            transition: all 0.3s ease;
+            will-change: transform, filter;
+        }
+        
+        .game-card:hover .game-icon {
+            transform: scale(1.15) rotate(8deg);
+            filter: drop-shadow(0 0 25px var(--current-accent));
+        }
+        
+        .game-title {
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--current-text), var(--current-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover .game-title {
+            background: linear-gradient(45deg, var(--current-primary), var(--current-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            font-weight: 600;
+            opacity: 0.8;
+            padding: 0 0.5rem;
+        }
+        
+        .game-stats span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 0.75rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            flex: 1;
+            white-space: nowrap;
+        }
+        
+        .game-card:hover .game-stats span {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .play-button {
+            background: linear-gradient(45deg, var(--current-primary), var(--current-secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 0 auto;
+            width: fit-content;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, var(--current-secondary), var(--current-accent));
+        }
+        
+        .play-button i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .play-button:hover i {
+            transform: scale(1.2);
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 2.5rem;
+            left: 2.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--current-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-button:hover {
+            background: var(--current-primary);
+            color: white;
+            transform: translateX(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .back-button i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover i {
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 1024px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+                max-width: 700px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hub-header {
+                padding: 1.25rem 1.5rem;
+            }
+            
+            .hub-title {
+                font-size: clamp(1.75rem, 6vw, 2.25rem);
+            }
+            
+            .hub-subtitle {
+                font-size: 1rem;
+            }
+            
+            .games-container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                max-width: 600px;
+            }
+            
+            .game-card {
+                padding: 1.25rem 1rem;
+                border-radius: 18px;
+            }
+            
+            .game-icon {
+                width: clamp(60px, 15vw, 80px);
+                height: clamp(60px, 15vw, 80px);
+                margin-bottom: 0.75rem;
+            }
+            
+            .game-title {
+                font-size: clamp(1rem, 4vw, 1.25rem);
+                margin-bottom: 0.75rem;
+            }
+            
+            .game-stats {
+                margin-bottom: 1rem;
+                font-size: 0.85rem;
+                padding: 0 0.25rem;
+            }
+            
+            .game-stats span {
+                padding: 0.35rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .play-button {
+                padding: 0.65rem 1.5rem;
+                font-size: 0.9rem;
+                gap: 0.5rem;
+            }
+            
+            .back-button {
+                top: 1.25rem;
+                left: 1.25rem;
+                padding: 0.75rem 1.15rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.85rem;
+                max-width: 500px;
+            }
+            
+            .game-card {
+                padding: 1rem 0.75rem;
+            }
+            
+            .game-icon {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .game-title {
+                font-size: 0.95rem;
+                margin-bottom: 0.6rem;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 0.35rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .play-button {
+                padding: 0.55rem 1.25rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hub-header {
+                padding: 1rem 1rem;
+            }
+            
+            .hub-title {
+                font-size: clamp(1.5rem, 7vw, 2rem);
+            }
+            
+            .hub-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .games-container {
+                padding: 1.25rem 0.75rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                max-width: 400px;
+            }
+            
+            .game-card {
+                padding: 1.25rem 1rem;
+                border-radius: 16px;
+            }
+            
+            .game-icon {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 0.75rem;
+            }
+            
+            .game-title {
+                font-size: 1.1rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .game-stats {
+                flex-direction: row;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .game-stats span {
+                padding: 0.35rem 0.5rem;
+                font-size: 0.75rem;
+            }
+            
+            .play-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .games-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .game-card {
+                padding: 1rem 0.75rem;
+            }
+            
+            .game-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .game-title {
+                font-size: 1rem;
+            }
+            
+            .play-button {
+                padding: 0.55rem 1.25rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body class="theme-dark">
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="assets/videos/bg2.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <!-- Particles Background -->
+    <!-- <div id="particles-js"></div> -->
+    
+    <!-- Back Button -->
+    <div class="back-button" onclick="navigateWithLoading('main-menu.html', 'Going Back...')">
+        <i class="fas fa-arrow-left"></i>
+        Back
+    </div>
+    
+    <!-- Games Hub -->
+    <div class="games-hub">
+        <!-- Header -->
+        <div class="hub-header">
+            <h1 class="hub-title">🎮 PLAY GAMES</h1>
+            <p class="hub-subtitle">Choose your favorite mini game</p>
+        </div>
+        
+        <!-- Games Container -->
+        <div class="games-container">
+            <!-- Games Grid -->
+            <div class="games-grid" id="games-grid">
+                <!-- Games will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="shared/themes.js"></script>
+    <script src="shared/sound-manager.js"></script>
+    <!-- <script src="shared/particles.js"></script> -->
+    <script src="shared/simple-loading.js"></script>
+    <script>
+        const games = [
+            {
+                id: 'snake',
+                title: 'Snake Game',
+                icon: 'icons/snake_4003844.png',
+                description: 'Classic snake game with modern graphics',
+                path: 'games/SnakeGame/index.html',
+                highScoreKey: 'snakeHighScore'
+            },
+            {
+                id: 'tictactoe',
+                title: 'Tic Tac Toe',
+                icon: 'icons/tic-tac-toe_10199841.png',
+                description: 'Strategic X and O battle',
+                path: 'games/tic tac toe/index.html',
+                highScoreKey: 'tictactoeStats'
+            },
+            {
+                id: 'memory',
+                title: 'Memory Match',
+                icon: 'icons/mind.png',
+                description: 'Test your memory with card matching',
+                path: 'games/memory-card-game-main/index.html',
+                highScoreKey: 'memoryBestTime_8'
+            },
+            {
+                id: 'whack',
+                title: 'Whack-a-Mole',
+                icon: 'icons/whack-a-mole.png',
+                description: 'Quick reflexes mole whacking fun',
+                path: 'games/whack-a-mole-main/index.html',
+                highScoreKey: 'whackHighScore'
+            },
+            {
+                id: 'rps',
+                title: 'Rock Paper Scissors',
+                icon: 'icons/rock-paper-scissors.png',
+                description: 'Classic hand game against AI',
+                path: 'games/StonePaperScissors/index.html',
+                highScoreKey: 'rpsStats'
+            },
+            {
+                id: 'reaction',
+                title: 'Reaction Test',
+                icon: 'icons/reaction-removebg-preview.png',
+                description: 'Test your lightning-fast reflexes',
+                path: 'games/reaction/index.html',
+                highScoreKey: 'reactionBestTime'
+            },
+            {
+                id: 'hangman',
+                title: 'Hangman',
+                icon: 'icons/hangman_3664099.png',
+                description: 'Guess the word letter by letter',
+                path: 'games/Hangman-Game/index.html',
+                highScoreKey: 'hangmanStats'
+            }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGames();
+            
+            // Animate games on load
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: '.hub-header',
+                    translateY: [-50, 0],
+                    opacity: [0, 1],
+                    duration: 800,
+                    easing: 'easeOutQuad'
+                });
+                
+                anime({
+                    targets: '.game-card',
+                    scale: [0, 1],
+                    opacity: [0, 1],
+                    duration: 600,
+                    delay: anime.stagger(100, {start: 500}),
+                    easing: 'easeOutBack'
+                });
+            }
+        });
+        
+        function renderGames() {
+            const gamesGrid = document.getElementById('games-grid');
+            
+            games.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.onclick = () => playGame(game.path);
+                
+                const highScore = getHighScore(game.highScoreKey);
+                const gamesPlayed = getGamesPlayed(game.highScoreKey);
+                
+                gameCard.innerHTML = `
+                    <img src="${game.icon}" alt="${game.title}" class="game-icon">
+                    <div class="game-title">${game.title}</div>
+                    <div class="game-stats">
+                        <span>Best: ${highScore}</span>
+                        <span>Played: ${gamesPlayed}</span>
+                    </div>
+                    <button class="play-button">
+                        <i class="fas fa-play"></i>
+                        Play
+                    </button>
+                `;
+                
+                gamesGrid.appendChild(gameCard);
+            });
+        }
+        
+        function getHighScore(key) {
+            const saved = localStorage.getItem(key);
+            if (!saved) return '0';
+            
+            if (key.includes('Stats')) {
+                try {
+                    const stats = JSON.parse(saved);
+                    return (stats.wins || 0).toString();
+                } catch (e) {
+                    return '0';
+                }
+            } else if (key.includes('Time')) {
+                const time = parseFloat(saved);
+                return time > 0 ? `${time.toFixed(2)}s` : '0';
+            } else {
+                return saved || '0';
+            }
+        }
+        
+        function getGamesPlayed(key) {
+            const saved = localStorage.getItem(key);
+            if (!saved) return '0';
+            
+            if (key.includes('Stats')) {
+                try {
+                    const stats = JSON.parse(saved);
+                    if (key === 'hangmanStats') {
+                        return ((stats.wins || 0) + (stats.losses || 0)).toString();
+                    } else {
+                        return ((stats.wins || 0) + (stats.losses || 0) + (stats.ties || 0)).toString();
+                    }
+                } catch (e) {
+                    return '0';
+                }
+            } else {
+                return localStorage.getItem(key) ? '1+' : '0';
+            }
+        }
+        
+        function playGame(gamePath) {
+            // Show simple loading and navigate
+            SimpleLoading.showAndNavigate(gamePath, 'Starting Game...', 600);
+        }
+        
+        function navigateWithLoading(url, text = 'Loading...') {
+            SimpleLoading.showAndNavigate(url, text, 600);
+        }
+    </script>
+</body>
+</html>

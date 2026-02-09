@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu - Game Hub</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Game Hub Main Menu - Navigate to games, profile, achievements, and settings. Your gaming adventure starts here!">
+    <meta name="keywords" content="game hub menu, gaming navigation, mini games menu, game selection">
+    <meta name="author" content="Game Hub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Main Menu - Game Hub">
+    <meta property="og:description" content="Navigate to games, profile, achievements, and settings. Your gaming adventure starts here!">
+    <meta property="og:image" content="../assets/images/og.png">
+    <meta property="og:image:alt" content="Game Hub Main Menu">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Game Hub">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Main Menu - Game Hub">
+    <meta name="twitter:description" content="Navigate to games, profile, achievements, and settings!">
+    <meta name="twitter:image" content="../assets/images/og.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/fb.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/fb.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        .main-menu {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .menu-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--current-primary);
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .menu-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--current-primary), var(--current-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            color: var(--current-text);
+        }
+        
+        .menu-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .menu-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .menu-option {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem 2.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menu-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .menu-option:hover::before {
+            left: 100%;
+        }
+        
+        .menu-option:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(0, 0, 0, 0.4);
+            border-color: var(--current-primary);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
+                        0 0 40px var(--current-primary);
+        }
+        
+        .option-icon {
+            font-size: 2.5rem;
+            width: 80px;
+            text-align: center;
+            filter: drop-shadow(0 0 10px var(--current-primary));
+            transition: all 0.3s ease;
+        }
+        
+        .menu-option:hover .option-icon {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 0 20px var(--current-accent));
+        }
+        
+        .option-content {
+            flex: 1;
+        }
+        
+        .option-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0;
+            background: linear-gradient(45deg, var(--current-text), var(--current-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-option:hover .option-title {
+            background: linear-gradient(45deg, var(--current-primary), var(--current-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .option-arrow {
+            font-size: 2rem;
+            opacity: 0.6;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--current-primary);
+        }
+        
+        .menu-option:hover .option-arrow {
+            transform: translateX(10px) scale(1.3);
+            opacity: 1;
+            color: var(--current-accent);
+        }
+        
+        .menu-footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--current-primary);
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Removed unused stats styles */
+        
+        @media (max-width: 768px) {
+            .menu-title {
+                font-size: 2.5rem;
+            }
+            
+            .menu-options {
+                gap: 1.5rem;
+            }
+            
+            .menu-option {
+                padding: 1.8rem 2rem;
+                gap: 1.2rem;
+            }
+            
+            .option-icon {
+                font-size: 2rem;
+                width: 60px;
+            }
+            
+            .option-title {
+                font-size: 1.3rem;
+            }
+            
+            /* Removed unused mobile stats styles */
+        }
+    </style>
+</head>
+<body class="theme-dark">
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="assets/videos/bg2.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Main Menu -->
+    <div class="main-menu">
+        <!-- Header -->
+        <div class="menu-header">
+            <h1 class="menu-title">🎮 GAME HUB</h1>
+            <p class="menu-subtitle">Choose your gaming adventure</p>
+        </div>
+        
+        <!-- Menu Content -->
+        <div class="menu-content">
+            <div class="menu-options">
+                <div class="menu-option" id="play-games" onclick="navigateWithLoading('games-hub.html', 'Loading Games...')">
+                    <div class="option-icon">🎯</div>
+                    <div class="option-content">
+                        <div class="option-title">Play Games</div>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </div>
+                
+                <div class="menu-option" id="player-profile" onclick="navigateWithLoading('profile.html', 'Loading Profile...')">
+                    <div class="option-icon">👤</div>
+                    <div class="option-content">
+                        <div class="option-title">Player Profile</div>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </div>
+                
+                <div class="menu-option" id="achievements" onclick="navigateWithLoading('achievements.html', 'Loading Achievements...')">
+                    <div class="option-icon">🏅</div>
+                    <div class="option-content">
+                        <div class="option-title">Achievements</div>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </div>
+                
+                <div class="menu-option" id="settings" onclick="navigateWithLoading('settings.html', 'Loading Settings...')">
+                    <div class="option-icon">⚙️</div>
+                    <div class="option-content">
+                        <div class="option-title">Settings</div>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </div>
+                
+                <div class="menu-option" id="about" onclick="navigateWithLoading('about.html', 'Loading About...')">
+                    <div class="option-icon">ℹ️</div>
+                    <div class="option-content">
+                        <div class="option-title">About</div>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </div>
+                
+                <div class="menu-option" id="exit" onclick="navigateWithLoading('../index.html', 'Exiting...')">
+                    <div class="option-icon">🚪</div>
+                    <div class="option-content">
+                        <div class="option-title">Exit</div>
+                    </div>
+                    <div class="option-arrow">→</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="menu-footer">
+            <!-- Footer stats removed -->
+        </div>
+    </div>
+
+    <script src="shared/themes.js"></script>
+    <script src="shared/sound-manager.js"></script>
+    <script src="shared/music-manager.js"></script>
+    <script src="shared/particles-config.js"></script>
+    <script src="shared/simple-loading.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optimize animations for better performance
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            // Load and display stats - removed
+            // loadPlayerStats();
+            
+            // Animate menu options on load (only if motion is not reduced)
+            if (typeof anime !== 'undefined' && !prefersReducedMotion) {
+                anime({
+                    targets: '.menu-header',
+                    translateY: [-30, 0],
+                    opacity: [0, 1],
+                    duration: 600,
+                    easing: 'easeOutQuad'
+                });
+                
+                anime({
+                    targets: '.menu-option',
+                    translateX: [-50, 0],
+                    opacity: [0, 1],
+                    duration: 400,
+                    delay: anime.stagger(80, {start: 300}),
+                    easing: 'easeOutQuad'
+                });
+                
+                anime({
+                    targets: '.menu-footer',
+                    translateY: [30, 0],
+                    opacity: [0, 1],
+                    duration: 600,
+                    delay: 800,
+                    easing: 'easeOutQuad'
+                });
+            } else {
+                // Instant show for reduced motion
+                document.querySelectorAll('.menu-header, .menu-option, .menu-footer').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                });
+            }
+            
+            // Add optimized hover effects
+            document.querySelectorAll('.menu-option').forEach(option => {
+                option.addEventListener('mouseenter', () => {
+                    if (!prefersReducedMotion) {
+                        option.style.willChange = 'transform, box-shadow';
+                    }
+                });
+                
+                option.addEventListener('mouseleave', () => {
+                    option.style.willChange = 'auto';
+                });
+            });
+        });
+        
+        // loadPlayerStats function removed since footer stats are no longer displayed
+        
+        function navigateWithLoading(url, text = 'Loading...') {
+            SimpleLoading.showAndNavigate(url, text, 600);
+        }
+    </script>
+</body>
+</html>

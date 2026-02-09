@@ -1,0 +1,57 @@
+{
+  "icons": {
+    "lightning": {
+      "path": "assets/icons/lightning.svg",
+      "description": "Lightning bolt icon for the game title",
+      "usage": "Header title decoration"
+    },
+    "reset": {
+      "path": "assets/icons/reset.svg", 
+      "description": "Reset/refresh icon for reset button",
+      "usage": "Reset button decoration"
+    },
+    "trophy": {
+      "path": "assets/icons/trophy.svg",
+      "description": "Trophy icon for achievements",
+      "usage": "New record celebrations"
+    },
+    "target": {
+      "path": "assets/icons/target.svg",
+      "description": "Target/bullseye icon",
+      "usage": "Accuracy indicators"
+    },
+    "favicon": {
+      "path": "assets/icons/favicon.svg",
+      "description": "Website favicon",
+      "usage": "Browser tab icon"
+    }
+  },
+  "sounds": {
+    "click": {
+      "path": "assets/sounds/click.mp3",
+      "description": "Click sound effect",
+      "usage": "Circle click feedback"
+    },
+    "success": {
+      "path": "assets/sounds/success.mp3", 
+      "description": "Success sound effect",
+      "usage": "Successful reaction feedback"
+    },
+    "fail": {
+      "path": "assets/sounds/fail.mp3",
+      "description": "Failure sound effect", 
+      "usage": "Too early click feedback"
+    },
+    "record": {
+      "path": "assets/sounds/record.mp3",
+      "description": "New record sound effect",
+      "usage": "New best time achievement"
+    }
+  },
+  "images": {
+    "backgrounds": {
+      "description": "Background patterns and textures",
+      "usage": "Visual enhancements"
+    }
+  }
+}

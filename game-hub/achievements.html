@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - Game Hub</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Unlock achievements and earn XP in Game Hub! Track your progress through Beginner, Intermediate, Advanced, and Legendary achievements across all games.">
+    <meta name="keywords" content="achievements, gaming achievements, XP rewards, game progress, unlock achievements, gaming milestones">
+    <meta name="author" content="Game Hub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Achievements - Game Hub">
+    <meta property="og:description" content="Unlock achievements and earn XP! Track your progress through Beginner, Intermediate, Advanced, and Legendary achievements.">
+    <meta property="og:image" content="../assets/images/og.png">
+    <meta property="og:image:alt" content="Game Hub Achievements System">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Game Hub">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Achievements - Game Hub">
+    <meta name="twitter:description" content="Unlock achievements and earn XP across all Game Hub mini-games!">
+    <meta name="twitter:image" content="../assets/images/og.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/fb.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/fb.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        .achievements-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .achievements-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .achievements-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--current-primary), var(--current-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievements-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            color: var(--current-text);
+        }
+        
+        .progress-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .progress-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--current-primary);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+        
+        .progress-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 
+                        0 0 30px var(--current-primary);
+        }
+        
+        .progress-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--current-primary));
+        }
+        
+        .progress-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--current-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .achievements-categories {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--current-primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .achievement-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            opacity: 0.5;
+        }
+        
+        .achievement-card.unlocked {
+            opacity: 1;
+            border-color: var(--current-primary);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 
+                        0 0 30px var(--current-primary);
+        }
+        
+        .achievement-card.unlocked::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        
+        .achievement-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .achievement-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 15px var(--current-primary));
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card.unlocked .achievement-icon {
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .achievement-info {
+            flex: 1;
+        }
+        
+        .achievement-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--current-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievement-description {
+            font-size: 1rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        .achievement-progress {
+            margin-top: 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--current-primary), var(--current-accent));
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+        
+        .progress-text {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-align: center;
+        }
+        
+        .achievement-reward {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--current-accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .achievement-card.unlocked .achievement-reward {
+            opacity: 1;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 2.5rem;
+            left: 2.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--current-primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-button:hover {
+            background: var(--current-primary);
+            color: white;
+            transform: translateX(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .back-button i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover i {
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 768px) {
+            .achievements-title {
+                font-size: 2.5rem;
+            }
+            
+            .achievements-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .achievement-card {
+                padding: 1.5rem;
+            }
+            
+            .achievement-header {
+                gap: 1rem;
+            }
+            
+            .achievement-icon {
+                font-size: 2.5rem;
+            }
+            
+            .achievement-name {
+                font-size: 1.3rem;
+            }
+            
+            .back-button {
+                top: 1.5rem;
+                left: 1.5rem;
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .progress-overview {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .progress-card {
+                padding: 1.5rem;
+            }
+            
+            .progress-icon {
+                font-size: 2.5rem;
+            }
+            
+            .progress-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="theme-dark min-h-screen">
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop preload="metadata">
+        <source src="assets/videos/bg2.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <!-- Particles Background -->
+    <!-- <div id="particles-js"></div> -->
+    
+    <!-- Back Button -->
+    <div class="back-button" onclick="navigateWithLoading('main-menu.html', 'Going Back...')">
+        <i class="fas fa-arrow-left"></i>
+        Back
+    </div>
+    
+    <!-- Achievements Container -->
+    <div class="achievements-container">
+        <!-- Header -->
+        <div class="achievements-header">
+            <h1 class="achievements-title">🏅 ACHIEVEMENTS</h1>
+            <p class="achievements-subtitle">Unlock your gaming potential</p>
+        </div>
+        
+        <!-- Progress Overview -->
+        <div class="progress-overview">
+            <div class="progress-card">
+                <div class="progress-icon">🏆</div>
+                <div class="progress-value" id="unlocked-count">0</div>
+                <div class="progress-label">Unlocked</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-icon">📊</div>
+                <div class="progress-value" id="completion-percentage">0%</div>
+                <div class="progress-label">Completion</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-icon">⭐</div>
+                <div class="progress-value" id="total-points">0</div>
+                <div class="progress-label">Achievement Points</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-icon">🎯</div>
+                <div class="progress-value" id="next-achievement">-</div>
+                <div class="progress-label">Next Goal</div>
+            </div>
+        </div>
+        
+        <!-- Beginner Achievements -->
+        <div class="achievements-categories">
+            <h2 class="category-title">
+                <i class="fas fa-seedling"></i>
+                Beginner Achievements
+            </h2>
+            <div class="achievements-grid" id="beginner-achievements">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Intermediate Achievements -->
+        <div class="achievements-categories">
+            <h2 class="category-title">
+                <i class="fas fa-fire"></i>
+                Intermediate Achievements
+            </h2>
+            <div class="achievements-grid" id="intermediate-achievements">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Advanced Achievements -->
+        <div class="achievements-categories">
+            <h2 class="category-title">
+                <i class="fas fa-crown"></i>
+                Advanced Achievements
+            </h2>
+            <div class="achievements-grid" id="advanced-achievements">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Legendary Achievements -->
+        <div class="achievements-categories">
+            <h2 class="category-title">
+                <i class="fas fa-gem"></i>
+                Legendary Achievements
+            </h2>
+            <div class="achievements-grid" id="legendary-achievements">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="shared/themes.js"></script>
+    <script src="shared/sound-manager.js"></script>
+    <!-- <script src="shared/particles.js"></script> -->
+    <script src="shared/simple-loading.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAchievements();
+            
+            // Animate elements on load
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: '.achievements-header',
+                    translateY: [-50, 0],
+                    opacity: [0, 1],
+                    duration: 800,
+                    easing: 'easeOutQuad'
+                });
+                
+                anime({
+                    targets: '.progress-card',
+                    scale: [0, 1],
+                    opacity: [0, 1],
+                    duration: 600,
+                    delay: anime.stagger(100, {start: 500}),
+                    easing: 'easeOutElastic(1, .8)'
+                });
+                
+                anime({
+                    targets: '.achievement-card',
+                    translateY: [30, 0],
+                    opacity: [0, 1],
+                    duration: 600,
+                    delay: anime.stagger(50, {start: 1000}),
+                    easing: 'easeOutQuad'
+                });
+            }
+        });
+        
+        function loadAchievements() {
+            // Get player stats
+            const stats = getPlayerStats();
+            
+            // Define all achievements with detailed information
+            const achievements = {
+                beginner: [
+                    {
+                        id: 'first_game',
+                        icon: '🎯',
+                        name: 'First Steps',
+                        description: 'Play your first game in Game Hub',
+                        condition: stats.totalGames >= 1,
+                        progress: Math.min(stats.totalGames, 1),
+                        target: 1,
+                        points: 10,
+                        reward: '+10 XP'
+                    },
+                    {
+                        id: 'first_win',
+                        icon: '🏆',
+                        name: 'Victory!',
+                        description: 'Win your first game',
+                        condition: stats.totalWins >= 1,
+                        progress: Math.min(stats.totalWins, 1),
+                        target: 1,
+                        points: 25,
+                        reward: '+25 XP'
+                    },
+                    {
+                        id: 'explorer',
+                        icon: '🗺️',
+                        name: 'Explorer',
+                        description: 'Try 3 different games',
+                        condition: stats.gamesPlayed >= 3,
+                        progress: Math.min(stats.gamesPlayed, 3),
+                        target: 3,
+                        points: 50,
+                        reward: '+50 XP'
+                    },
+                    {
+                        id: 'persistent',
+                        icon: '💪',
+                        name: 'Persistent',
+                        description: 'Play 10 games total',
+                        condition: stats.totalGames >= 10,
+                        progress: Math.min(stats.totalGames, 10),
+                        target: 10,
+                        points: 75,
+                        reward: '+75 XP'
+                    }
+                ],
+                intermediate: [
+                    {
+                        id: 'on_fire',
+                        icon: '🔥',
+                        name: 'On Fire',
+                        description: 'Win 10 games',
+                        condition: stats.totalWins >= 10,
+                        progress: Math.min(stats.totalWins, 10),
+                        target: 10,
+                        points: 100,
+                        reward: '+100 XP'
+                    },
+                    {
+                        id: 'century',
+                        icon: '💯',
+                        name: 'Century Club',
+                        description: 'Reach 100 total score',
+                        condition: stats.totalScore >= 100,
+                        progress: Math.min(stats.totalScore, 100),
+                        target: 100,
+                        points: 150,
+                        reward: '+150 XP'
+                    },
+                    {
+                        id: 'dedicated',
+                        icon: '🎮',
+                        name: 'Dedicated Gamer',
+                        description: 'Play 25 games total',
+                        condition: stats.totalGames >= 25,
+                        progress: Math.min(stats.totalGames, 25),
+                        target: 25,
+                        points: 200,
+                        reward: '+200 XP'
+                    },
+                    {
+                        id: 'snake_master',
+                        icon: '🐍',
+                        name: 'Snake Master',
+                        description: 'Score 500+ in Snake Game',
+                        condition: stats.snakeScore >= 500,
+                        progress: Math.min(stats.snakeScore, 500),
+                        target: 500,
+                        points: 250,
+                        reward: '+250 XP'
+                    },
+                    {
+                        id: 'word_wizard',
+                        icon: '🎯',
+                        name: 'Word Wizard',
+                        description: 'Win 10 Hangman games',
+                        condition: getHangmanWins() >= 10,
+                        progress: Math.min(getHangmanWins(), 10),
+                        target: 10,
+                        points: 200,
+                        reward: '+200 XP'
+                    }
+                ],
+                advanced: [
+                    {
+                        id: 'rising_star',
+                        icon: '🌟',
+                        name: 'Rising Star',
+                        description: 'Reach 500 total score',
+                        condition: stats.totalScore >= 500,
+                        progress: Math.min(stats.totalScore, 500),
+                        target: 500,
+                        points: 300,
+                        reward: '+300 XP'
+                    },
+                    {
+                        id: 'champion',
+                        icon: '👑',
+                        name: 'Champion',
+                        description: 'Reach 1000 total score',
+                        condition: stats.totalScore >= 1000,
+                        progress: Math.min(stats.totalScore, 1000),
+                        target: 1000,
+                        points: 500,
+                        reward: '+500 XP'
+                    },
+                    {
+                        id: 'pro_player',
+                        icon: '🚀',
+                        name: 'Pro Player',
+                        description: 'Play 50 games total',
+                        condition: stats.totalGames >= 50,
+                        progress: Math.min(stats.totalGames, 50),
+                        target: 50,
+                        points: 400,
+                        reward: '+400 XP'
+                    },
+                    {
+                        id: 'memory_genius',
+                        icon: '🧠',
+                        name: 'Memory Genius',
+                        description: 'Complete Memory Match in under 30 seconds',
+                        condition: stats.memoryBestTime > 0 && stats.memoryBestTime <= 30,
+                        progress: stats.memoryBestTime > 0 ? (stats.memoryBestTime <= 30 ? 1 : 0) : 0,
+                        target: 1,
+                        points: 350,
+                        reward: '+350 XP'
+                    }
+                ],
+                legendary: [
+                    {
+                        id: 'legend',
+                        icon: '💎',
+                        name: 'Legend',
+                        description: 'Reach 5000 total score',
+                        condition: stats.totalScore >= 5000,
+                        progress: Math.min(stats.totalScore, 5000),
+                        target: 5000,
+                        points: 1000,
+                        reward: '+1000 XP'
+                    },
+                    {
+                        id: 'perfectionist',
+                        icon: '⭐',
+                        name: 'Perfectionist',
+                        description: 'Win 100 games',
+                        condition: stats.totalWins >= 100,
+                        progress: Math.min(stats.totalWins, 100),
+                        target: 100,
+                        points: 750,
+                        reward: '+750 XP'
+                    },
+                    {
+                        id: 'lightning_reflexes',
+                        icon: '⚡',
+                        name: 'Lightning Reflexes',
+                        description: 'React in under 200ms in Reaction Test',
+                        condition: stats.reactionBestTime > 0 && stats.reactionBestTime <= 200,
+                        progress: stats.reactionBestTime > 0 ? (stats.reactionBestTime <= 200 ? 1 : 0) : 0,
+                        target: 1,
+                        points: 800,
+                        reward: '+800 XP'
+                    },
+                    {
+                        id: 'ultimate_gamer',
+                        icon: '🏅',
+                        name: 'Ultimate Gamer',
+                        description: 'Play 100 games total',
+                        condition: stats.totalGames >= 100,
+                        progress: Math.min(stats.totalGames, 100),
+                        target: 100,
+                        points: 1500,
+                        reward: '+1500 XP'
+                    }
+                ]
+            };
+            
+            // Render achievements
+            renderAchievementCategory('beginner', achievements.beginner);
+            renderAchievementCategory('intermediate', achievements.intermediate);
+            renderAchievementCategory('advanced', achievements.advanced);
+            renderAchievementCategory('legendary', achievements.legendary);
+            
+            // Update progress overview
+            updateProgressOverview(achievements);
+        }
+        
+        function getPlayerStats() {
+            const stats = {
+                totalGames: 0,
+                totalWins: 0,
+                totalScore: 0,
+                gamesPlayed: 0,
+                snakeScore: 0,
+                memoryBestTime: 0,
+                reactionBestTime: 0
+            };
+            
+            // Snake Game
+            const snakeScore = parseInt(localStorage.getItem('snakeHighScore')) || 0;
+            if (snakeScore > 0) {
+                stats.totalGames += 1;
+                stats.totalWins += 1;
+                stats.totalScore += snakeScore;
+                stats.gamesPlayed += 1;
+                stats.snakeScore = snakeScore;
+            }
+            
+            // Tic Tac Toe
+            try {
+                const tttStats = JSON.parse(localStorage.getItem('tictactoeStats') || '{}');
+                const games = (tttStats.wins || 0) + (tttStats.losses || 0) + (tttStats.ties || 0);
+                if (games > 0) {
+                    stats.totalGames += games;
+                    stats.totalWins += (tttStats.wins || 0);
+                    stats.totalScore += (tttStats.wins || 0) * 10;
+                    stats.gamesPlayed += 1;
+                }
+            } catch (e) {}
+            
+            // Memory Match
+            const memoryTime = parseInt(localStorage.getItem('memoryBestTime_8')) || 0;
+            if (memoryTime > 0) {
+                stats.totalGames += 1;
+                stats.totalWins += 1;
+                stats.totalScore += Math.max(0, 1000 - memoryTime);
+                stats.gamesPlayed += 1;
+                stats.memoryBestTime = memoryTime;
+            }
+            
+            // Whack-a-Mole
+            const whackScore = parseInt(localStorage.getItem('whackHighScore')) || 0;
+            if (whackScore > 0) {
+                stats.totalGames += 1;
+                stats.totalWins += 1;
+                stats.totalScore += whackScore;
+                stats.gamesPlayed += 1;
+            }
+            
+            // Rock Paper Scissors
+            try {
+                const rpsStats = JSON.parse(localStorage.getItem('rpsStats') || '{}');
+                const games = (rpsStats.wins || 0) + (rpsStats.losses || 0) + (rpsStats.ties || 0);
+                if (games > 0) {
+                    stats.totalGames += games;
+                    stats.totalWins += (rpsStats.wins || 0);
+                    stats.totalScore += (rpsStats.wins || 0) * 10;
+                    stats.gamesPlayed += 1;
+                }
+            } catch (e) {}
+            
+            // Reaction Test
+            const reactionTime = parseInt(localStorage.getItem('reactionBestTime')) || 0;
+            if (reactionTime > 0) {
+                stats.totalGames += 1;
+                stats.totalWins += 1;
+                stats.totalScore += Math.max(0, 1000 - reactionTime);
+                stats.gamesPlayed += 1;
+                stats.reactionBestTime = reactionTime;
+            }
+            
+            // Hangman
+            try {
+                const hangmanStats = JSON.parse(localStorage.getItem('hangmanStats') || '{}');
+                const games = (hangmanStats.wins || 0) + (hangmanStats.losses || 0);
+                if (games > 0) {
+                    stats.totalGames += games;
+                    stats.totalWins += (hangmanStats.wins || 0);
+                    stats.totalScore += (hangmanStats.wins || 0) * 15; // Higher score for word games
+                    stats.gamesPlayed += 1;
+                }
+            } catch (e) {}
+            
+            return stats;
+        }
+        
+        function getHangmanWins() {
+            try {
+                const hangmanStats = JSON.parse(localStorage.getItem('hangmanStats') || '{}');
+                return hangmanStats.wins || 0;
+            } catch (e) {
+                return 0;
+            }
+        }
+        
+        function renderAchievementCategory(categoryId, achievements) {
+            const container = document.getElementById(`${categoryId}-achievements`);
+            container.innerHTML = '';
+            
+            achievements.forEach(achievement => {
+                const card = document.createElement('div');
+                card.className = `achievement-card ${achievement.condition ? 'unlocked' : ''}`;
+                
+                const progressPercentage = (achievement.progress / achievement.target) * 100;
+                
+                card.innerHTML = `
+                    <div class="achievement-reward">${achievement.reward}</div>
+                    <div class="achievement-header">
+                        <div class="achievement-icon">${achievement.icon}</div>
+                        <div class="achievement-info">
+                            <div class="achievement-name">${achievement.name}</div>
+                            <div class="achievement-description">${achievement.description}</div>
+                        </div>
+                    </div>
+                    <div class="achievement-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progressPercentage}%"></div>
+                        </div>
+                        <div class="progress-text">${achievement.progress}/${achievement.target}</div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+        
+        function updateProgressOverview(achievements) {
+            let totalAchievements = 0;
+            let unlockedAchievements = 0;
+            let totalPoints = 0;
+            let nextAchievement = null;
+            let minProgress = Infinity;
+            
+            // Count achievements and points
+            Object.values(achievements).forEach(category => {
+                category.forEach(achievement => {
+                    totalAchievements++;
+                    if (achievement.condition) {
+                        unlockedAchievements++;
+                        totalPoints += achievement.points;
+                    } else {
+                        const progressRatio = achievement.progress / achievement.target;
+                        if (progressRatio < minProgress) {
+                            minProgress = progressRatio;
+                            nextAchievement = achievement.name;
+                        }
+                    }
+                });
+            });
+            
+            const completionPercentage = Math.round((unlockedAchievements / totalAchievements) * 100);
+            
+            // Update display
+            document.getElementById('unlocked-count').textContent = `${unlockedAchievements}/${totalAchievements}`;
+            document.getElementById('completion-percentage').textContent = `${completionPercentage}%`;
+            document.getElementById('total-points').textContent = totalPoints.toLocaleString();
+            document.getElementById('next-achievement').textContent = nextAchievement || 'All Complete!';
+        }
+        
+        function navigateWithLoading(url, text = 'Loading...') {
+            SimpleLoading.showAndNavigate(url, text, 600);
+        }
+    </script>
+</body>
+</html>

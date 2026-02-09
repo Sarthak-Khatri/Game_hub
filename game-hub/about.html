@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Game Hub</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn about Game Hub - a comprehensive gaming platform featuring 7 mini-games, multiple themes, achievements system, and immersive gaming experience.">
+    <meta name="keywords" content="about game hub, gaming platform, mini games collection, game development, browser games">
+    <meta name="author" content="Game Hub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="About - Game Hub">
+    <meta property="og:description" content="Learn about Game Hub - a comprehensive gaming platform featuring 7 mini-games, multiple themes, and achievements system.">
+    <meta property="og:image" content="../assets/images/og.png">
+    <meta property="og:image:alt" content="About Game Hub">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Game Hub">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About - Game Hub">
+    <meta name="twitter:description" content="Learn about Game Hub gaming platform and its features!">
+    <meta name="twitter:image" content="../assets/images/og.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/fb.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/fb.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .about-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--current-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .about-section {
+            background: var(--current-surface);
+            border: 2px solid var(--current-primary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .about-section:hover {
+            box-shadow: var(--current-glow, var(--current-shadow)) var(--current-primary);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--current-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-content {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .feature-item {
+            background: var(--current-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--current-primary);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--current-accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+        
+        .version-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--current-bg);
+            border-radius: 8px;
+            border: 1px solid var(--current-primary);
+        }
+    </style>
+</head>
+<body class="theme-dark min-h-screen">
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="assets/videos/bg2.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <!-- Particles Background -->
+    <!-- <div id="particles-js"></div> -->
+    
+    <!-- Back Button -->
+    <div class="btn btn-secondary back-button" onclick="navigateWithLoading('main-menu.html', 'Going Back...')" style="cursor: pointer;">
+        <i class="fas fa-arrow-left"></i> Back
+    </div>
+    
+    <!-- About Container -->
+    <div class="about-container">
+        <!-- Header -->
+        <div class="about-header">
+            <h1 class="about-title">ℹ️ About Game Hub</h1>
+            <p>Your ultimate mini gaming experience</p>
+        </div>
+        
+        <!-- About Section -->
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                What is Game Hub?
+            </h2>
+            <div class="section-content">
+                <p>Game Hub is a comprehensive collection of classic mini games reimagined with modern design and features. Built with cutting-edge web technologies, it offers a seamless gaming experience across all devices with beautiful themes, smooth animations, and engaging gameplay.</p>
+                
+                <p style="margin-top: 1rem;">Whether you're looking for a quick brain teaser, want to test your reflexes, or just need a fun break, Game Hub has something for everyone. Each game is carefully crafted to provide hours of entertainment while maintaining the simplicity and charm of classic arcade games.</p>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                Features
+            </h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎮</div>
+                    <div class="feature-name">6 Mini Games</div>
+                    <div class="feature-desc">Classic games with modern twists</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-name">3 Themes</div>
+                    <div class="feature-desc">Neon, Cartoon, and Dark themes</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-name">Mobile Ready</div>
+                    <div class="feature-desc">Perfect on any device</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏆</div>
+                    <div class="feature-name">High Scores</div>
+                    <div class="feature-desc">Track your best performances</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">❄️</div>
+                    <div class="feature-name">Particle Effects</div>
+                    <div class="feature-desc">Beautiful falling snow animations</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-name">Fast & Smooth</div>
+                    <div class="feature-desc">Optimized performance</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Games Section -->
+        <div class="about-section">
+            <h2 class="section-title">
+                <i class="fas fa-gamepad"></i>
+                Available Games
+            </h2>
+            <div class="section-content">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🐍</div>
+                        <div class="feature-name">Snake Game</div>
+                        <div class="feature-desc">Classic snake with modern controls</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⭕</div>
+                        <div class="feature-name">Tic Tac Toe</div>
+                        <div class="feature-desc">Strategic battles vs AI or friends</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🧠</div>
+                        <div class="feature-name">Memory Match</div>
+                        <div class="feature-desc">Test your memory with card matching</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔨</div>
+                        <div class="feature-name">Whack-a-Mole</div>
+                        <div class="feature-desc">Fast-paced mole whacking action</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✂️</div>
+                        <div class="feature-name">Rock Paper Scissors</div>
+                        <div class="feature-desc">Classic hand game with animations</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-name">Reaction Test</div>
+                        <div class="feature-desc">Test your reflexes and reaction time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Version Info -->
+        <div class="version-info">
+            <p><strong>Game Hub</strong> v1.0.0</p>
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">
+                Built with ❤️ for gamers everywhere
+            </p>
+        </div>
+    </div>
+
+    <script src="shared/themes.js"></script>
+    <script src="shared/sound-manager.js"></script>
+    <!-- <script src="shared/particles.js"></script> -->
+    <script src="shared/simple-loading.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate sections on load
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: '.about-header',
+                    translateY: [-50, 0],
+                    opacity: [0, 1],
+                    duration: 800,
+                    easing: 'easeOutQuad'
+                });
+                
+                anime({
+                    targets: '.about-section',
+                    translateY: [30, 0],
+                    opacity: [0, 1],
+                    duration: 600,
+                    delay: anime.stagger(100, {start: 300}),
+                    easing: 'easeOutQuad'
+                });
+                
+                anime({
+                    targets: '.version-info',
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    duration: 500,
+                    delay: 1000,
+                    easing: 'easeOutElastic(1, .8)'
+                });
+            }
+            
+            // Add hover effects to feature items
+            document.querySelectorAll('.feature-item').forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    if (typeof anime !== 'undefined') {
+                        anime({
+                            targets: item,
+                            scale: 1.05,
+                            duration: 200,
+                            easing: 'easeOutQuad'
+                        });
+                    }
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    if (typeof anime !== 'undefined') {
+                        anime({
+                            targets: item,
+                            scale: 1,
+                            duration: 200,
+                            easing: 'easeOutQuad'
+                        });
+                    }
+                });
+            });
+        });
+        
+        function navigateWithLoading(url, text = 'Loading...') {
+            SimpleLoading.showAndNavigate(url, text, 600);
+        }
+    </script>
+</body>
+</html>

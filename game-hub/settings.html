@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Game Hub</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Customize your Game Hub experience! Change themes, adjust sound effects, manage game settings, and personalize your gaming preferences.">
+    <meta name="keywords" content="game settings, theme selection, sound effects, game preferences, customization, gaming options">
+    <meta name="author" content="Game Hub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Settings - Game Hub">
+    <meta property="og:description" content="Customize your Game Hub experience! Change themes, adjust sound effects, and manage game settings.">
+    <meta property="og:image" content="../assets/images/og.png">
+    <meta property="og:image:alt" content="Game Hub Settings">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Game Hub">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Settings - Game Hub">
+    <meta name="twitter:description" content="Customize your Game Hub experience with themes and settings!">
+    <meta name="twitter:image" content="../assets/images/og.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/fb.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/fb.png">
+    <link rel="manifest" href="../site.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .settings-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .settings-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--current-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .settings-section {
+            background: var(--current-surface);
+            border: 2px solid var(--current-primary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .settings-section:hover {
+            box-shadow: var(--current-glow, var(--current-shadow)) var(--current-primary);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--current-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--current-primary);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-weight: 600;
+            color: var(--current-text);
+        }
+        
+        .setting-description {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+        }
+        
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--current-bg);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--current-primary);
+        }
+        
+        .toggle-switch.active {
+            background: var(--current-primary);
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(28px);
+        }
+        
+        .slider-control {
+            width: 150px;
+            height: 6px;
+            background: var(--current-bg);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .slider-fill {
+            height: 100%;
+            background: var(--current-primary);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .slider-thumb {
+            position: absolute;
+            top: -7px;
+            width: 20px;
+            height: 20px;
+            background: var(--current-primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        .select-control {
+            padding: 0.5rem 1rem;
+            background: var(--current-bg);
+            border: 2px solid var(--current-primary);
+            border-radius: 8px;
+            color: var(--current-text);
+            cursor: pointer;
+            min-width: 120px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .setting-control {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body class="theme-dark min-h-screen">
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="assets/videos/bg2.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <!-- Particles Background -->
+    <!-- <div id="particles-js"></div> -->
+    
+    <!-- Back Button -->
+    <div class="btn btn-secondary back-button" onclick="navigateWithLoading('main-menu.html', 'Going Back...')" style="cursor: pointer;">
+        <i class="fas fa-arrow-left"></i> Back
+    </div>
+    
+    <!-- Settings Container -->
+    <div class="settings-container">
+        <!-- Header -->
+        <div class="settings-header">
+            <h1 class="settings-title">⚙️ Settings</h1>
+            <p>Customize your gaming experience</p>
+        </div>
+        
+        <!-- Theme Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">
+                <i class="fas fa-palette"></i>
+                Theme & Appearance
+            </h2>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Theme</div>
+                    <div class="setting-description">Choose your preferred visual theme</div>
+                </div>
+                <div class="setting-control">
+                    <select class="select-control" id="theme-select">
+                        <option value="dark">Dark</option>
+                        <option value="anime">Neon</option>
+                        <option value="cartoon">Cartoon</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">
+                <i class="fas fa-gamepad"></i>
+                Game Settings
+            </h2>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Difficulty</div>
+                    <div class="setting-description">Default game difficulty level</div>
+                </div>
+                <div class="setting-control">
+                    <select class="select-control" id="difficulty-select">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Auto-Save</div>
+                    <div class="setting-description">Automatically save game progress</div>
+                </div>
+                <div class="setting-control">
+                    <div class="toggle-switch active" id="autosave-toggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Show Hints</div>
+                    <div class="setting-description">Display helpful hints during games</div>
+                </div>
+                <div class="setting-control">
+                    <div class="toggle-switch active" id="hints-toggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Audio Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">
+                <i class="fas fa-volume-up"></i>
+                Audio Settings
+            </h2>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Master Volume</div>
+                    <div class="setting-description">Overall audio volume</div>
+                </div>
+                <div class="setting-control">
+                    <div class="slider-control" id="master-volume">
+                        <div class="slider-fill" style="width: 70%"></div>
+                        <div class="slider-thumb" style="left: 70%"></div>
+                    </div>
+                    <span id="master-volume-value">70%</span>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Sound Effects</div>
+                    <div class="setting-description">Enable game sound effects</div>
+                </div>
+                <div class="setting-control">
+                    <div class="toggle-switch active" id="sfx-toggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Background Music</div>
+                    <div class="setting-description">Enable background music</div>
+                </div>
+                <div class="setting-control">
+                    <div class="toggle-switch" id="music-toggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Settings -->
+        <div class="settings-section">
+            <h2 class="section-title">
+                <i class="fas fa-database"></i>
+                Data Management
+            </h2>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Clear High Scores</div>
+                    <div class="setting-description">Reset all game high scores</div>
+                </div>
+                <div class="setting-control">
+                    <button class="btn btn-secondary" id="clear-scores-btn">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <div>
+                    <div class="setting-label">Reset All Data</div>
+                    <div class="setting-description">Clear all saved data and settings</div>
+                </div>
+                <div class="setting-control">
+                    <button class="btn btn-secondary" id="reset-all-btn">
+                        <i class="fas fa-exclamation-triangle"></i> Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="button-group">
+            <button class="btn btn-primary" id="save-settings">
+                <i class="fas fa-save"></i> Save Settings
+            </button>
+            <button class="btn btn-secondary" id="reset-settings">
+                <i class="fas fa-undo"></i> Reset to Default
+            </button>
+        </div>
+    </div>
+
+    <script src="shared/themes.js"></script>
+    <script src="shared/sound-manager.js"></script>
+    <script src="shared/music-manager.js"></script>
+    <!-- <script src="shared/particles.js"></script> -->
+    <script src="shared/simple-loading.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+            setupEventListeners();
+            
+            // Animate sections on load
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: '.settings-header',
+                    translateY: [-50, 0],
+                    opacity: [0, 1],
+                    duration: 800,
+                    easing: 'easeOutQuad'
+                });
+                
+                anime({
+                    targets: '.settings-section',
+                    translateY: [30, 0],
+                    opacity: [0, 1],
+                    duration: 600,
+                    delay: anime.stagger(100, {start: 300}),
+                    easing: 'easeOutQuad'
+                });
+            }
+        });
+        
+        function setupEventListeners() {
+            // Theme selector
+            document.getElementById('theme-select').addEventListener('change', (e) => {
+                if (window.themeManager) {
+                    window.themeManager.switchTheme(e.target.value);
+                }
+            });
+            
+            // Toggle switches
+            document.querySelectorAll('.toggle-switch').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    toggle.classList.toggle('active');
+                    
+                    // Update sound manager when SFX toggle changes
+                    if (toggle.id === 'sfx-toggle' && window.soundManager) {
+                        const isActive = toggle.classList.contains('active');
+                        window.soundManager.setEnabled(isActive);
+                        
+                        // Play a test sound if enabling
+                        if (isActive) {
+                            setTimeout(() => window.soundManager.play('success'), 100);
+                        }
+                    }
+                    
+                    // Update music manager when music toggle changes
+                    if (toggle.id === 'music-toggle' && window.musicManager) {
+                        const isActive = toggle.classList.contains('active');
+                        window.musicManager.setEnabled(isActive);
+                    }
+                });
+            });
+            
+            // Clear scores button
+            document.getElementById('clear-scores-btn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear all high scores? This cannot be undone.')) {
+                    clearHighScores();
+                }
+            });
+            
+            // Reset all data button
+            document.getElementById('reset-all-btn').addEventListener('click', () => {
+                if (confirm('Are you sure you want to reset ALL data? This will clear everything and cannot be undone.')) {
+                    resetAllData();
+                }
+            });
+            
+            // Save settings button
+            document.getElementById('save-settings').addEventListener('click', () => {
+                saveSettings();
+                showNotification('Settings saved successfully!');
+            });
+            
+            // Reset settings button
+            document.getElementById('reset-settings').addEventListener('click', () => {
+                if (confirm('Reset all settings to default values?')) {
+                    resetToDefaults();
+                }
+            });
+        }
+        
+        function loadSettings() {
+            // Load saved settings from localStorage
+            const settings = JSON.parse(localStorage.getItem('gameHubSettings') || '{}');
+            
+            // Apply theme
+            const theme = settings.theme || 'dark';
+            document.getElementById('theme-select').value = theme;
+            if (window.themeManager) {
+                window.themeManager.switchTheme(theme);
+            }
+            
+            // Apply other settings
+            setToggle('autosave-toggle', settings.autosave !== false);
+            setToggle('hints-toggle', settings.hints !== false);
+            setToggle('sfx-toggle', settings.sfx !== false);
+            setToggle('music-toggle', settings.music === true);
+            
+            document.getElementById('difficulty-select').value = settings.difficulty || 'medium';
+        }
+        
+        function saveSettings() {
+            const settings = {
+                theme: document.getElementById('theme-select').value,
+                autosave: document.getElementById('autosave-toggle').classList.contains('active'),
+                hints: document.getElementById('hints-toggle').classList.contains('active'),
+                sfx: document.getElementById('sfx-toggle').classList.contains('active'),
+                music: document.getElementById('music-toggle').classList.contains('active'),
+                difficulty: document.getElementById('difficulty-select').value
+            };
+            
+            localStorage.setItem('gameHubSettings', JSON.stringify(settings));
+        }
+        
+        function setToggle(id, active) {
+            const toggle = document.getElementById(id);
+            if (active) {
+                toggle.classList.add('active');
+            } else {
+                toggle.classList.remove('active');
+            }
+        }
+        
+        function clearHighScores() {
+            const gameKeys = [
+                'snakeHighScore',
+                'tictactoeStats',
+                'memoryBestTime_6',
+                'memoryBestTime_8',
+                'memoryBestTime_12',
+                'whackHighScore',
+                'rpsStats',
+                'reactionBestTime',
+                'reactionHistory'
+            ];
+            
+            gameKeys.forEach(key => {
+                localStorage.removeItem(key);
+            });
+            
+            showNotification('High scores cleared successfully!');
+        }
+        
+        function resetAllData() {
+            localStorage.clear();
+            showNotification('All data has been reset!');
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
+        
+        function resetToDefaults() {
+            document.getElementById('theme-select').value = 'dark';
+            document.getElementById('difficulty-select').value = 'medium';
+            
+            setToggle('autosave-toggle', true);
+            setToggle('hints-toggle', true);
+            setToggle('sfx-toggle', true);
+            setToggle('music-toggle', false);
+            
+            if (window.themeManager) {
+                window.themeManager.switchTheme('dark');
+            }
+            
+            showNotification('Settings reset to defaults!');
+        }
+        
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: var(--current-primary);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                z-index: 1000;
+                font-weight: 600;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: notification,
+                    translateX: [100, 0],
+                    opacity: [0, 1],
+                    duration: 300,
+                    easing: 'easeOutQuad'
+                });
+                
+                // Animate out after 3 seconds
+                setTimeout(() => {
+                    anime({
+                        targets: notification,
+                        translateX: [0, 100],
+                        opacity: [1, 0],
+                        duration: 300,
+                        easing: 'easeInQuad',
+                        complete: () => {
+                            document.body.removeChild(notification);
+                        }
+                    });
+                }, 3000);
+            } else {
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 3000);
+            }
+        }
+        
+        function navigateWithLoading(url, text = 'Loading...') {
+            SimpleLoading.showAndNavigate(url, text, 600);
+        }
+    </script>
+</body>
+</html>
