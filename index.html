@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub - Ultimate Gaming Experience</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Game Hub - Your ultimate gaming destination featuring 7 exciting mini-games including Snake, Tic Tac Toe, Memory Match, Hangman, and more. Play now with multiple themes and achievements!">
+    <meta name="keywords" content="games, mini games, snake game, tic tac toe, memory game, hangman, gaming hub, browser games, free games, online games">
+    <meta name="author" content="Game Hub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Game Hub - Ultimate Gaming Experience">
+    <meta property="og:description" content="Play 7 exciting mini-games with multiple themes and achievements. Snake, Tic Tac Toe, Memory Match, Hangman and more!">
+    <meta property="og:image" content="assets/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Game Hub - Collection of Mini Games">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Game Hub">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Game Hub - Ultimate Gaming Experience">
+    <meta name="twitter:description" content="Play 7 exciting mini-games with multiple themes and achievements!">
+    <meta name="twitter:image" content="assets/images/og.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/fb.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/fb.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/fb.png">
+    <link rel="manifest" href="site.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="game-hub/shared/styles.css">
+    <style>
+        
+        .start-screen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-container {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .main-logo {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--current-primary), var(--current-secondary), var(--current-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px var(--current-primary);
+            margin-bottom: 1rem;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 20px var(--current-primary));
+            will-change: transform, filter;
+        }
+        
+        @keyframes logoGlow {
+            0% { 
+                filter: drop-shadow(0 0 20px var(--current-primary)) drop-shadow(0 0 40px var(--current-primary));
+                transform: scale(1);
+            }
+            100% { 
+                filter: drop-shadow(0 0 40px var(--current-accent)) drop-shadow(0 0 60px var(--current-accent));
+                transform: scale(1.02);
+            }
+        }
+        
+        .subtitle {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            opacity: 0.9;
+            margin-bottom: 4rem;
+            font-weight: 300;
+            background: linear-gradient(45deg, var(--current-text), var(--current-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .start-button {
+            padding: clamp(1.2rem 2rem, 4vw, 2rem 4rem);
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--current-primary), var(--current-secondary));
+            color: white;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: clamp(1px, 0.5vw, 3px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            will-change: transform, box-shadow;
+        }
+        
+        .start-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+            background: linear-gradient(45deg, var(--current-secondary), var(--current-accent));
+        }
+        
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .start-button:hover::before {
+            left: 100%;
+        }
+        
+        .start-button i {
+            margin-right: 1rem;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .start-button:hover i {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            margin-bottom: 4rem;
+            font-weight: 300;
+            background: linear-gradient(45deg, var(--current-text), var(--current-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .start-button {
+            padding: 2rem 4rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--current-primary), var(--current-secondary));
+            color: white;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .start-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+            background: linear-gradient(45deg, var(--current-secondary), var(--current-accent));
+        }
+        
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .start-button:hover::before {
+            left: 100%;
+        }
+        
+        .start-button i {
+            margin-right: 1rem;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .start-button:hover i {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .simple-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .loading-content {
+            text-align: center;
+            animation: slideUp 0.4s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .loading-controller {
+            width: 100px;
+            height: 65px;
+            position: relative;
+            animation: controllerSpin 2s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+        
+        .controller {
+            width: 100px;
+            height: 65px;
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 20px 20px 12px 12px;
+            position: relative;
+            box-shadow: 
+                0 0 15px var(--current-primary),
+                inset 0 2px 8px rgba(255,255,255,0.1),
+                inset 0 -2px 8px rgba(0,0,0,0.3);
+            border: 2px solid var(--current-primary);
+        }
+        
+        .controller::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 16px;
+            width: 20px;
+            height: 12px;
+            background: linear-gradient(145deg, #333, #222);
+            border-radius: 6px 6px 0 0;
+            border: 1px solid var(--current-secondary);
+        }
+        
+        .controller::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 16px;
+            width: 20px;
+            height: 12px;
+            background: linear-gradient(145deg, #333, #222);
+            border-radius: 6px 6px 0 0;
+            border: 1px solid var(--current-secondary);
+        }
+        
+        .d-pad {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .d-pad::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 16px;
+            height: 6px;
+            background: var(--current-accent);
+            border-radius: 2px;
+            box-shadow: 0 0 4px var(--current-accent);
+        }
+        
+        .d-pad::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5px;
+            width: 6px;
+            height: 16px;
+            background: var(--current-accent);
+            border-radius: 2px;
+            box-shadow: 0 0 4px var(--current-accent);
+        }
+        
+        .buttons {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 25px;
+            height: 25px;
+        }
+        
+        .button {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 6px currentColor;
+            animation: buttonPulse 1.5s ease-in-out infinite;
+        }
+        
+        .button:nth-child(1) {
+            top: 0;
+            left: 9px;
+            background: #ff4757;
+            color: #ff4757;
+            animation-delay: 0s;
+        }
+        
+        .button:nth-child(2) {
+            top: 9px;
+            right: 0;
+            background: #2ed573;
+            color: #2ed573;
+            animation-delay: 0.2s;
+        }
+        
+        .button:nth-child(3) {
+            bottom: 0;
+            left: 9px;
+            background: #3742fa;
+            color: #3742fa;
+            animation-delay: 0.4s;
+        }
+        
+        .button:nth-child(4) {
+            top: 9px;
+            left: 0;
+            background: #ffa502;
+            color: #ffa502;
+            animation-delay: 0.6s;
+        }
+        
+        .analog-sticks {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 32px;
+        }
+        
+        .analog-stick {
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, var(--current-primary), var(--current-secondary));
+            border-radius: 50%;
+            border: 1px solid var(--current-accent);
+            box-shadow: 0 0 8px var(--current-primary);
+            animation: stickMove 3s ease-in-out infinite;
+        }
+        
+        .analog-stick:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes controllerSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes buttonPulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: scale(1.3);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes stickMove {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(1px, -1px); }
+            50% { transform: translate(-1px, 1px); }
+            75% { transform: translate(1px, 1px); }
+        }
+        
+        .loading-text {
+            color: var(--current-text);
+            font-size: 1.1rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .start-screen {
+                padding: 2rem 1rem;
+            }
+            
+            .logo-container {
+                margin-bottom: 2rem;
+            }
+            
+            .subtitle {
+                margin-bottom: 3rem;
+            }
+            
+            .start-button {
+                padding: 1.5rem 2.5rem;
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+                border-radius: 50px;
+            }
+            
+            .loading-controller {
+                width: 80px;
+                height: 52px;
+            }
+            
+            .controller {
+                width: 80px;
+                height: 52px;
+                border-radius: 16px 16px 10px 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .start-screen {
+                padding: 1.5rem 1rem;
+            }
+            
+            .logo-container {
+                margin-bottom: 1.5rem;
+            }
+            
+            .subtitle {
+                margin-bottom: 2.5rem;
+            }
+            
+            .start-button {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+                border-radius: 40px;
+            }
+            
+            .start-button i {
+                margin-right: 0.8rem;
+            }
+            
+            .loading-controller {
+                width: 70px;
+                height: 45px;
+            }
+            
+            .controller {
+                width: 70px;
+                height: 45px;
+                border-radius: 14px 14px 8px 8px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .start-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop preload="metadata">
+        <source src="assets/videos/bg2.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <!-- Particles Background -->
+    <!-- <div id="particles-js"></div> -->
+    
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <div class="logo-container">
+            <h1 class="main-logo">🎮 GAME HUB</h1>
+            <p class="subtitle">Your Ultimate Gaming Experience</p>
+        </div>
+        
+        <button class="start-button" id="start-button">
+            <i class="fas fa-play"></i>
+            Start Gaming
+        </button>
+    </div>
+
+    <script src="game-hub/shared/themes.js"></script>
+    <script src="game-hub/shared/sound-manager.js"></script>
+    <!-- <script src="game-hub/shared/particles.js"></script> -->
+    <script src="game-hub/shared/simple-loading.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Apply saved theme for start page (don't force dark theme)
+            // The theme manager will automatically load the saved theme from localStorage
+            
+            // Animate logo on load
+            if (typeof anime !== 'undefined') {
+                anime({
+                    targets: '.main-logo',
+                    scale: [0, 1],
+                    opacity: [0, 1],
+                    duration: 1000,
+                    easing: 'easeOutElastic(1, .8)',
+                    delay: 500
+                });
+                
+                anime({
+                    targets: '.subtitle',
+                    translateY: [30, 0],
+                    opacity: [0, 1],
+                    duration: 800,
+                    easing: 'easeOutQuad',
+                    delay: 1000
+                });
+                
+                anime({
+                    targets: '.start-button',
+                    scale: [0, 1],
+                    opacity: [0, 1],
+                    duration: 600,
+                    easing: 'easeOutBack',
+                    delay: 1500
+                });
+            }
+            
+            // Start button click
+            document.getElementById('start-button').addEventListener('click', () => {
+                startGameHub();
+            });
+        });
+        
+        function startGameHub() {
+            // Show simple loading and navigate
+            SimpleLoading.showAndNavigate('game-hub/main-menu.html', 'Loading Game Hub...', 800);
+        }
+    </script>
+</body>
+</html>
