@@ -267,16 +267,16 @@
     </div>
     
     <!-- Profile Container -->
-    <div class="profile-container">
+    <main class="profile-container">
         <!-- Profile Header -->
-        <div class="profile-header">
+        <header class="profile-header">
             <div class="profile-avatar">🎮</div>
             <h1 class="profile-name">Player</h1>
             <p class="profile-level">Level <span id="player-level">1</span> Gamer</p>
-        </div>
+        </header>
         
         <!-- Overall Stats -->
-        <div class="profile-stats">
+        <section class="profile-stats" aria-label="Overall statistics">
             <div class="stat-card">
                 <div class="stat-icon">🎯</div>
                 <div class="stat-value" id="total-games-played">0</div>
@@ -297,16 +297,16 @@
                 <div class="stat-value" id="win-streak">0</div>
                 <div class="stat-label">Best Streak</div>
             </div>
-        </div>
+        </section>
         
         <!-- Games Progress -->
-        <div class="games-progress">
+        <section class="games-progress">
             <h2 class="section-title">Game Progress</h2>
             <div class="game-progress-grid" id="games-grid">
                 <!-- Game cards will be populated by JavaScript -->
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script src="shared/themes.js"></script>
     <script src="shared/sound-manager.js"></script>

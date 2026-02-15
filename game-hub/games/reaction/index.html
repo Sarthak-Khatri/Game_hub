@@ -15,7 +15,7 @@
         ← Back
     </a>
     
-    <div class="container">
+    <main class="container">
         <header>
             <h1>
                 <svg class="title-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -26,7 +26,7 @@
             <p class="subtitle">Test your reflexes and beat your best time!</p>
         </header>
 
-        <div class="stats-container">
+        <section class="stats-container" aria-label="Game statistics">
             <div class="stat-card">
                 <div class="stat-icon">🏆</div>
                 <div class="stat-content">
@@ -76,16 +76,16 @@
                 </div>
                 <div class="reaction-hint" id="reaction-hint">Press Space or Click</div>
             </div>
-        </div>
+        </section>
 
-        <div class="controls-section">
+        <footer class="controls-section">
             <button id="reset-btn" class="reset-button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
                 </svg>
                 Reset Stats
             </button>
-            <div class="performance-guide">
+            <aside class="performance-guide" aria-label="Performance guide">
                 <h3>Performance Guide</h3>
                 <div class="guide-items">
                     <div class="guide-item excellent">⚡ &lt;200ms - Lightning!</div>

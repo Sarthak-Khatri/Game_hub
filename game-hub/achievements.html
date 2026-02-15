@@ -402,15 +402,15 @@
     </div>
     
     <!-- Achievements Container -->
-    <div class="achievements-container">
+    <main class="achievements-container">
         <!-- Header -->
-        <div class="achievements-header">
+        <header class="achievements-header">
             <h1 class="achievements-title">🏅 ACHIEVEMENTS</h1>
             <p class="achievements-subtitle">Unlock your gaming potential</p>
-        </div>
+        </header>
         
         <!-- Progress Overview -->
-        <div class="progress-overview">
+        <section class="progress-overview" aria-label="Achievement progress overview">
             <div class="progress-card">
                 <div class="progress-icon">🏆</div>
                 <div class="progress-value" id="unlocked-count">0</div>
@@ -431,52 +431,52 @@
                 <div class="progress-value" id="next-achievement">-</div>
                 <div class="progress-label">Next Goal</div>
             </div>
-        </div>
+        </section>
         
         <!-- Beginner Achievements -->
-        <div class="achievements-categories">
-            <h2 class="category-title">
+        <section class="achievements-categories" aria-labelledby="beginner-heading">
+            <h2 class="category-title" id="beginner-heading">
                 <i class="fas fa-seedling"></i>
                 Beginner Achievements
             </h2>
             <div class="achievements-grid" id="beginner-achievements">
                 <!-- Populated by JavaScript -->
             </div>
-        </div>
+        </section>
         
         <!-- Intermediate Achievements -->
-        <div class="achievements-categories">
-            <h2 class="category-title">
+        <section class="achievements-categories" aria-labelledby="intermediate-heading">
+            <h2 class="category-title" id="intermediate-heading">
                 <i class="fas fa-fire"></i>
                 Intermediate Achievements
             </h2>
             <div class="achievements-grid" id="intermediate-achievements">
                 <!-- Populated by JavaScript -->
             </div>
-        </div>
+        </section>
         
         <!-- Advanced Achievements -->
-        <div class="achievements-categories">
-            <h2 class="category-title">
+        <section class="achievements-categories" aria-labelledby="advanced-heading">
+            <h2 class="category-title" id="advanced-heading">
                 <i class="fas fa-crown"></i>
                 Advanced Achievements
             </h2>
             <div class="achievements-grid" id="advanced-achievements">
                 <!-- Populated by JavaScript -->
             </div>
-        </div>
+        </section>
         
         <!-- Legendary Achievements -->
-        <div class="achievements-categories">
-            <h2 class="category-title">
+        <section class="achievements-categories" aria-labelledby="legendary-heading">
+            <h2 class="category-title" id="legendary-heading">
                 <i class="fas fa-gem"></i>
                 Legendary Achievements
             </h2>
             <div class="achievements-grid" id="legendary-achievements">
                 <!-- Populated by JavaScript -->
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script src="shared/themes.js"></script>
     <script src="shared/sound-manager.js"></script>

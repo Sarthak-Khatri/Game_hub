@@ -426,6 +426,10 @@ document.addEventListener('DOMContentLoaded', () => {
     gameStats.categoriesPlayed[selectedCategory]++;
     
     // Update UI
+    const categoryEl = document.getElementById('category-name');
+    if (categoryEl) {
+      categoryEl.textContent = selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1);
+    }
     hintText.textContent = 'Click the hint button for a clue!';
     updateScoreDisplay();
     

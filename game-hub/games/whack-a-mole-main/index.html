@@ -21,19 +21,19 @@
     </a>
 
     <!-- Game Container -->
-    <div class="game-wrapper">
+    <main class="game-wrapper">
         <!-- Header -->
-        <div class="game-header">
+        <header class="game-header">
             <h1 class="game-title">
                 <span class="title-word">WHACK</span>
                 <span class="title-word">A</span>
                 <span class="title-word">MOLE</span>
             </h1>
             <p class="game-tagline">How fast are your reflexes?</p>
-        </div>
+        </header>
 
         <!-- Stats Panel -->
-        <div class="stats-panel">
+        <section class="stats-panel" aria-label="Game statistics">
             <div class="stat-card current-score">
                 <div class="stat-icon">🎯</div>
                 <div class="stat-content">
@@ -65,10 +65,10 @@
                     <span class="stat-value" id="streak">0</span>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Game Board -->
-        <div class="game-board-container">
+        <section class="game-board-container" aria-label="Game board">
             <div class="board">
                 <div class="hole" data-index="0"></div>
                 <div class="hole" data-index="1"></div>
@@ -80,12 +80,14 @@
                 <div class="hole" data-index="7"></div>
                 <div class="hole" data-index="8"></div>
             </div>
-        </div>
+        </section>
 
         <!-- Controls -->
-        <div class="controls">
-            <button id="startBtn" class="btn btn-start">Start Game</button>
-            <button id="resetBtn" class="btn btn-reset">Reset Stats</button>
+        <footer class="controls">
+            <nav aria-label="Game controls">
+                <button id="startBtn" class="btn btn-start">Start Game</button>
+                <button id="resetBtn" class="btn btn-reset">Reset Stats</button>
+            </nav>
             <div class="difficulty-selector">
                 <label for="difficulty">Difficulty:</label>
                 <select id="difficulty">
@@ -95,12 +97,12 @@
                     <option value="insane">Insane</option>
                 </select>
             </div>
-        </div>
+        </footer>
 
         <!-- Game Over Modal -->
-        <div class="modal" id="gameOverModal">
+        <aside class="modal" id="gameOverModal" role="dialog" aria-labelledby="modal-title">
             <div class="modal-content">
-                <h2 class="modal-title">Game Over!</h2>
+                <h2 class="modal-title" id="modal-title">Game Over!</h2>
                 <div class="modal-stats">
                     <div class="modal-stat">
                         <span class="modal-stat-label">Final Score</span>
@@ -122,8 +124,8 @@
                 <div class="modal-message" id="modalMessage"></div>
                 <button id="playAgainBtn" class="btn btn-start">Play Again</button>
             </div>
-        </div>
-    </div>
+        </aside>
+    </main>
 
     <!-- Custom Cursor -->
     <div class="cursor"></div>

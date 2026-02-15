@@ -15,11 +15,13 @@
         ← Back
     </a>
 
-    <div class="container">
-        <h1>⚡ ROCK PAPER SCISSORS ⚡</h1>
+    <main class="container">
+        <header>
+            <h1>⚡ ROCK PAPER SCISSORS ⚡</h1>
+        </header>
 
         <!-- Round Indicator -->
-        <div class="round-indicator">
+        <section class="round-indicator" aria-label="Round information">
             <div class="round-text" id="round-text">Round 1</div>
             <div class="round-dots" id="round-dots">
                 <div class="round-dot"></div>
@@ -28,9 +30,9 @@
                 <div class="round-dot"></div>
                 <div class="round-dot"></div>
             </div>
-        </div>
+        </section>
 
-        <div class="score-board">
+        <section class="score-board" aria-label="Current scores">
             <div class="score-box">
                 <div class="score-label">👤 You</div>
                 <div class="score-value" id="user-score">0</div>
@@ -39,9 +41,9 @@
                 <div class="score-label">🤖 Computer</div>
                 <div class="score-value" id="comp-score">0</div>
             </div>
-        </div>
+        </section>
 
-        <div class="choices-container" id="choices-container">
+        <nav class="choices-container" id="choices-container" aria-label="Game choices">
             <div class="choice" data-choice="rock">
                 <div class="choice-inner">
                     <img src="images/rock.png" alt="Rock" class="choice-image">
@@ -62,13 +64,13 @@
                 </div>
                 <div class="choice-label">✂️ Scissors</div>
             </div>
-        </div>
+        </nav>
 
-        <div class="message-container">
+        <section class="message-container" aria-live="polite">
             <div class="message" id="message">Choose your weapon! ⚔️</div>
-        </div>
+        </section>
 
-        <div class="stats-container">
+        <section class="stats-container" aria-label="Game statistics">
             <div class="stat-box">
                 <div class="stat-label">🏆 Matches Won</div>
                 <div class="stat-value" id="matches-won">0</div>
@@ -81,30 +83,30 @@
                 <div class="stat-label">🎮 Total Rounds</div>
                 <div class="stat-value" id="total-rounds">0</div>
             </div>
-        </div>
+        </section>
 
-        <div class="button-container">
+        <footer class="button-container">
             <button class="btn" id="new-match">🆕 New Match</button>
             <button class="btn" id="reset">🔄 Reset Stats</button>
-        </div>
-    </div>
+        </footer>
+    </main>
 
     <!-- Battle Overlay -->
-    <div class="battle-overlay" id="battle-overlay">
+    <aside class="battle-overlay" id="battle-overlay" role="dialog" aria-label="Battle animation">
         <div class="battle-content">
             <div class="vs-text">⚔️ VS ⚔️</div>
             <div class="battle-choices" id="battle-choices"></div>
         </div>
-    </div>
+    </aside>
 
     <!-- Victory Overlay -->
-    <div class="victory-overlay" id="victory-overlay">
+    <aside class="victory-overlay" id="victory-overlay" role="dialog" aria-labelledby="victory-title">
         <div class="victory-content">
             <div class="victory-title" id="victory-title">🎉 YOU WIN! 🎉</div>
             <div class="victory-subtitle" id="victory-subtitle">You won 3 rounds!</div>
             <button class="btn" onclick="startNewMatch()">🎮 Play Again</button>
         </div>
-    </div>
+    </aside>
 
     <script src="app.js"></script>
 </body>

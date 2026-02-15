@@ -20,7 +20,7 @@
     </a>
 
     <!-- Main Container -->
-    <div class="container">
+    <main class="container">
         <!-- Header -->
         <header class="header">
             <h1 class="title">
@@ -30,7 +30,7 @@
         </header>
 
         <!-- Game Status -->
-        <div class="status-panel">
+        <section class="status-panel" aria-live="polite">
             <div class="status-display">
                 <div class="status-text" id="statusText">YOUR MOVE</div>
                 <div class="ai-thinking" id="aiThinking">
@@ -40,10 +40,10 @@
                     AI COMPUTING...
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Game Board -->
-        <div class="game-area">
+        <section class="game-area" aria-label="Game board">
             <div class="board" id="board">
                 <div class="cell" data-cell></div>
                 <div class="cell" data-cell></div>
@@ -56,10 +56,10 @@
                 <div class="cell" data-cell></div>
             </div>
             <div class="winning-line" id="winningLine"></div>
-        </div>
+        </section>
 
         <!-- Scoreboard -->
-        <div class="scoreboard">
+        <section class="scoreboard" aria-label="Game scores">
             <div class="score-box player-score">
                 <div class="score-header">PLAYER</div>
                 <div class="score-symbol">✕</div>
@@ -77,30 +77,30 @@
                 <div class="score-symbol">◯</div>
                 <div class="score-number" id="aiWins">0</div>
             </div>
-        </div>
+        </section>
 
         <!-- Controls -->
-        <div class="controls">
+        <footer class="controls">
             <div class="difficulty-panel">
                 <label for="difficulty">DIFFICULTY MODE</label>
-                <div class="difficulty-buttons">
+                <nav class="difficulty-buttons" aria-label="Difficulty selection">
                     <button class="diff-btn" data-difficulty="easy">EASY</button>
                     <button class="diff-btn active" data-difficulty="medium">MEDIUM</button>
                     <button class="diff-btn" data-difficulty="impossible">IMPOSSIBLE</button>
-                </div>
+                </nav>
             </div>
             
-            <div class="action-buttons">
+            <nav class="action-buttons" aria-label="Game actions">
                 <button class="btn btn-primary" id="restartBtn">NEW GAME</button>
                 <button class="btn btn-secondary" id="resetStatsBtn">RESET STATS</button>
-            </div>
-        </div>
+            </nav>
+        </footer>
 
         <!-- Win Animation -->
-        <div class="celebration" id="celebration">
+        <aside class="celebration" id="celebration">
             <img src="excited.gif" alt="Celebration" class="celebration-gif">
-        </div>
-    </div>
+        </aside>
+    </main>
 
     <script src="script.js"></script>
 </body>

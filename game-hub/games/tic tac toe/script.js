@@ -7,9 +7,9 @@ let difficulty = 'medium';
 
 // Game Stats
 let stats = {
-    player: 0,
-    ai: 0,
-    draws: 0
+    wins: 0,
+    losses: 0,
+    ties: 0
 };
 
 // Winning Combinations
@@ -249,22 +249,22 @@ function endGame(draw) {
     
     if (draw) {
         statusText.textContent = 'DRAW!';
-        stats.draws++;
-        updateScore('draws');
+        stats.ties++;
+        updateScore('ties');
     } else {
         const winner = currentClass;
         const winCombo = getWinningCombination(winner);
         
         if (winner === X_CLASS) {
             statusText.textContent = 'PLAYER WINS!';
-            stats.player++;
-            updateScore('player');
+            stats.wins++;
+            updateScore('wins');
             showCelebration();
             playSound(audioWin);
         } else {
             statusText.textContent = 'AI WINS!';
-            stats.ai++;
-            updateScore('ai');
+            stats.losses++;
+            updateScore('losses');
             playSound(audioWin);
         }
         
@@ -305,16 +305,16 @@ function showCelebration() {
 
 // Update Score Display
 function updateScoreDisplay() {
-    playerWinsEl.textContent = stats.player;
-    aiWinsEl.textContent = stats.ai;
-    drawsEl.textContent = stats.draws;
+    playerWinsEl.textContent = stats.wins;
+    aiWinsEl.textContent = stats.losses;
+    drawsEl.textContent = stats.ties;
 }
 
 // Update Score with Animation
 function updateScore(type) {
     let element;
-    if (type === 'player') element = playerWinsEl;
-    else if (type === 'ai') element = aiWinsEl;
+    if (type === 'wins') element = playerWinsEl;
+    else if (type === 'losses') element = aiWinsEl;
     else element = drawsEl;
     
     element.classList.add('score-update');
@@ -323,17 +323,17 @@ function updateScore(type) {
 
 // Save Stats
 function saveStats() {
-    localStorage.setItem('tictactoeNeonStats', JSON.stringify(stats));
+    localStorage.setItem('tictactoeStats', JSON.stringify(stats));
 }
 
 // Load Stats
 function loadStats() {
-    const saved = localStorage.getItem('tictactoeNeonStats');
+    const saved = localStorage.getItem('tictactoeStats');
     if (saved) {
         try {
             stats = JSON.parse(saved);
         } catch (e) {
-            stats = { player: 0, ai: 0, draws: 0 };
+            stats = { wins: 0, losses: 0, ties: 0 };
         }
     }
 }
@@ -341,7 +341,7 @@ function loadStats() {
 // Reset Stats
 function resetStats() {
     if (confirm('Reset all statistics?')) {
-        stats = { player: 0, ai: 0, draws: 0 };
+        stats = { wins: 0, losses: 0, ties: 0 };
         saveStats();
         updateScoreDisplay();
     }

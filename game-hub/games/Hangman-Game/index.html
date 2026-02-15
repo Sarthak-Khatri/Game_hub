@@ -57,15 +57,21 @@
   </script>
   
   <!-- Back Button -->
-  <div class="btn btn-secondary back-button" onclick="navigateWithLoading('../../games-hub.html', 'Going Back...')" style="cursor: pointer;">
+  <nav class="btn btn-secondary back-button" onclick="navigateWithLoading('../../games-hub.html', 'Going Back...')" style="cursor: pointer;">
     <i class="fas fa-arrow-left"></i> Back
-  </div>
+  </nav>
   
-  <div class="game-container">
-    <h1>Hangman Game</h1>
+  <main class="game-container">
+    <header>
+      <h1>Hangman Game</h1>
+      <div class="category-badge">
+        <i class="fas fa-tag"></i>
+        <span id="category-name">Animals</span>
+      </div>
+    </header>
     
     <!-- Result Modal -->
-    <div id="result-modal" class="result-modal">
+    <aside id="result-modal" class="result-modal" role="dialog" aria-labelledby="result-title">
       <div class="result-modal-content">
         <div class="particles-container" id="particles-container"></div>
         <div class="result-icon" id="result-icon">🎉</div>
@@ -94,24 +100,20 @@
           </button>
         </div>
       </div>
-    </div>
+    </aside>
     
-    <div class="game-status">
+    <section class="game-status" aria-label="Game status">
       <div class="status-item">
         <i class="fas fa-heart"></i>
         <span id="remaining-guesses">Remaining guesses: 6</span>
       </div>
       <div class="status-item">
-        <i class="fas fa-tag"></i>
-        <span id="category">Category: Animals</span>
-      </div>
-      <div class="status-item">
         <i class="fas fa-star"></i>
         <span id="current-score">Score: 0</span>
       </div>
-    </div>
+    </section>
     
-    <div class="hint-section">
+    <section class="hint-section" aria-label="Hint section">
       <div class="hint-container">
         <i class="fas fa-lightbulb"></i>
         <span id="hint-text">Click the hint button for a clue!</span>
@@ -119,9 +121,9 @@
       <button id="hint-btn" class="hint-btn">
         <i class="fas fa-question-circle"></i> Get Hint
       </button>
-    </div>
+    </section>
     
-    <div class="hangman-container">
+    <section class="hangman-container" aria-label="Hangman drawing">
       <div class="hangman-wrapper">
         <svg id="hangman-svg" width="200" height="200" viewBox="0 0 200 200">
           <!-- Gallows -->
@@ -149,19 +151,19 @@
           </g>
         </svg>
       </div>
-    </div>
+    </section>
     
-    <div class="word-display" id="word-display">
+    <section class="word-display" id="word-display" aria-label="Word to guess">
       <!-- Word letters will appear here -->
-    </div>
+    </section>
     
-    <div class="keyboard" id="keyboard">
+    <nav class="keyboard" id="keyboard" aria-label="Letter keyboard">
       <!-- Keyboard letters will be added by JavaScript -->
-    </div>
+    </nav>
     
-    <div class="game-message" id="game-message"></div>
+    <div class="game-message" id="game-message" aria-live="polite"></div>
     
-    <div class="game-controls">
+    <footer class="game-controls">
       <button id="hint-btn-mobile" class="control-btn hint-btn-mobile">
         <i class="fas fa-lightbulb"></i>
         <span>Hint</span>
@@ -174,8 +176,8 @@
         <i class="fas fa-trash-alt"></i>
         <span>Reset Stats</span>
       </button>
-    </div>
-  </div>
+    </footer>
+  </main>
 
   <script src="../../shared/themes.js"></script>
   <script src="../../shared/sound-manager.js"></script>

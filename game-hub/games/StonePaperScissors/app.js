@@ -4,8 +4,9 @@ let compScore = 0;
 let currentRound = 1;
 let roundHistory = [];
 let gameStats = {
-    matchesWon: 0,
-    matchesLost: 0,
+    wins: 0,
+    losses: 0,
+    ties: 0,
     totalRounds: 0
 };
 let gameInProgress = true;
@@ -40,14 +41,14 @@ function createParticles() {
  * Load saved statistics from localStorage
  */
 function loadStats() {
-    const saved = localStorage.getItem('rpsMatchStats');
+    const saved = localStorage.getItem('rpsStats');
     if (saved) {
         try {
             gameStats = JSON.parse(saved);
             updateStatsDisplay();
         } catch (e) {
             console.error('Error loading stats:', e);
-            gameStats = { matchesWon: 0, matchesLost: 0, totalRounds: 0 };
+            gameStats = { wins: 0, losses: 0, ties: 0, totalRounds: 0 };
         }
     }
 }
@@ -56,7 +57,7 @@ function loadStats() {
  * Save current statistics to localStorage
  */
 function saveStats() {
-    localStorage.setItem('rpsMatchStats', JSON.stringify(gameStats));
+    localStorage.setItem('rpsStats', JSON.stringify(gameStats));
 }
 
 // ========================================
@@ -67,8 +68,8 @@ function saveStats() {
  * Update the statistics display on screen
  */
 function updateStatsDisplay() {
-    document.getElementById('matches-won').textContent = gameStats.matchesWon;
-    document.getElementById('matches-lost').textContent = gameStats.matchesLost;
+    document.getElementById('matches-won').textContent = gameStats.wins;
+    document.getElementById('matches-lost').textContent = gameStats.losses;
     document.getElementById('total-rounds').textContent = gameStats.totalRounds;
 }
 
@@ -346,7 +347,7 @@ function playGame(userChoice) {
             updateMessage(`🎉 Round ${currentRound}: You Win! ${userChoice} beats ${compChoice}!`, 'win');
             
             if (userScore === 3) {
-                gameStats.matchesWon++;
+                gameStats.wins++;
                 gameInProgress = false;
                 setTimeout(() => {
                     showVictoryScreen('user');
@@ -360,7 +361,7 @@ function playGame(userChoice) {
             updateMessage(`💔 Round ${currentRound}: You Lose! ${compChoice} beats ${userChoice}!`, 'lose');
             
             if (compScore === 3) {
-                gameStats.matchesLost++;
+                gameStats.losses++;
                 gameInProgress = false;
                 setTimeout(() => {
                     showVictoryScreen('comp');
@@ -412,7 +413,7 @@ function initializeNewMatchButton() {
 function initializeResetButton() {
     document.getElementById('reset').addEventListener('click', () => {
         if (confirm('🤔 Are you sure you want to reset all statistics?')) {
-            gameStats = { matchesWon: 0, matchesLost: 0, totalRounds: 0 };
+            gameStats = { wins: 0, losses: 0, ties: 0, totalRounds: 0 };
             updateStatsDisplay();
             saveStats();
             startNewMatch();
